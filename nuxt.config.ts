@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   ssr: true,
   modules: ['@nuxt/icon', '@nuxt/ui', '@pinia/nuxt'],
   runtimeConfig: {
-    airtableApiKey: 'env'
+    airtableApiKey: 'env',
+    public: {
+      apiBase: process.env.NUXT_DATA_API_BASE
+    }
   }
 })
