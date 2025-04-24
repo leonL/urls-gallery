@@ -8,7 +8,7 @@
 
 <template>
   <div>
-    <h1>Resources</h1>
+    <h1>{{ store.count }} Resources</h1>
     <ul>
       <li v-for="resource in store.filtered" :key="resource.id">
         {{ resource.title }}

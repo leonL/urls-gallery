@@ -2,7 +2,9 @@ import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import { getResources } from '~/shared/api/data';
 
+
 export const useResourceStore = defineStore('resource', () => {
+  const config = useRuntimeConfig();
   const resources = ref<{ id: string; title: string }[]>([]);
 
   const all = computed(() => resources.value);
@@ -12,12 +14,25 @@ export const useResourceStore = defineStore('resource', () => {
   function fetchResources() {
 
     return new Promise(async (resolve) => {
-      const response = await getResources();
+      let allResourcesFetched = false;
+      let offsetToken = '';
 
-      resources.value = response.records.map((record) => ({
-        id: record.id,
-        title: record.fields['TITLE EN'],
-      }));
+      while (!allResourcesFetched) {
+        let response = await getResources(config, offsetToken);
+        let responseRecordsArray = response.records.map((record) => ({
+          id: record.id,
+          title: record.fields['TITLE EN'],
+        }));
+
+        resources.value.push(...responseRecordsArray);
+
+        if (response.offset === undefined) {
+          allResourcesFetched = true;
+        } else {
+          offsetToken = response.offset;
+        }
+      }
+
       resolve('fetched');
     });
   }
