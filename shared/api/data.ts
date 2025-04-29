@@ -1,28 +1,28 @@
-interface StoreResource {
-  id: string,
-  title: string
-}
-
 interface ApiResource {
-  id: string,
+  id: string, // get rid of this
   fields: {
-    'TITLE EN': string;
+    'TITLE EN': string,
+    'TITLE FR': string
+    // 'LINK EN': string,
+    // 'LINK FR': string,
+    // 'AUTHOR': string
   };
 }
+
 
 interface ApiResponse {
   offset: string,
   records: ApiResource[]
 }
 
-export async function getAllResources(): Promise<StoreResource[]> {
+export async function getAllRows(table: string): Promise<ApiResource[]> {
   const config = useRuntimeConfig();
-  let allRecords: StoreResource[] = [];
-  let allResourcesFetched = false;
+  let allRows = [];
+  let allRowsFetched = false;
   let offsetToken = '';
 
-  while (!allResourcesFetched) {
-    let response = await $fetch<ApiResponse>('/RESOURCES', {
+  while (!allRowsFetched) {
+    let response = await $fetch<ApiResponse>(`/${table}`, {
       baseURL: config.public.apiBase,
       headers: {
         Authorization: `Bearer ${config.airtableApiKey}`
@@ -33,19 +33,14 @@ export async function getAllResources(): Promise<StoreResource[]> {
       }
     })
 
-    let records = response.records.map((record) => ({
-      id: record.id,
-      title: record.fields['TITLE EN'],
-    }));
-
-    allRecords.push(...records);
+    allRows.push(...response.records);
 
     if (response.offset === undefined) {
-      allResourcesFetched = true;
+      allRowsFetched = true;
     } else {
       offsetToken = response.offset;
     }
   }
 
-  return allRecords;
+  return allRows;
 }

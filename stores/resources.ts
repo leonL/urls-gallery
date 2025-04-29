@@ -1,16 +1,29 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import { getAllResources } from '~/shared/api/data';
+import { getAllRows } from '~/shared/api/data';
+
+interface StoreResource {
+  id: number,
+  enTitle: string,
+  frTitle: string
+}
 
 export const useResourceStore = defineStore('resource', () => {
-  const resources = ref<{ id: string; title: string }[]>([]);
+  const resources = ref<StoreResource[]>([]);
 
   const filtered = computed(() => resources.value.slice(0, 10));
   const count = computed(() => resources.value.length);
 
   function fetchResources() {
     return new Promise(async (resolve) => {
-      resources.value = await getAllResources();
+      const response = await getAllRows('RESOURCES');
+
+      resources.value = response.map((record, id) => ({
+        id, 
+        enTitle: record.fields['TITLE EN'],
+        frTitle: record.fields['TITLE FR']
+      }));
+
       resolve('fetched');
     });
   }
