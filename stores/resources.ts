@@ -1,41 +1,20 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import { getResources } from '~/shared/api/data';
-
+import { getAllResources } from '~/shared/api/data';
 
 export const useResourceStore = defineStore('resource', () => {
   const config = useRuntimeConfig();
   const resources = ref<{ id: string; title: string }[]>([]);
 
-  const all = computed(() => resources.value);
   const filtered = computed(() => resources.value.slice(0, 10));
   const count = computed(() => resources.value.length);
 
   function fetchResources() {
-
     return new Promise(async (resolve) => {
-      let allResourcesFetched = false;
-      let offsetToken = '';
-
-      while (!allResourcesFetched) {
-        let response = await getResources(config, offsetToken);
-        let responseRecordsArray = response.records.map((record) => ({
-          id: record.id,
-          title: record.fields['TITLE EN'],
-        }));
-
-        resources.value.push(...responseRecordsArray);
-
-        if (response.offset === undefined) {
-          allResourcesFetched = true;
-        } else {
-          offsetToken = response.offset;
-        }
-      }
-
+      resources.value = await getAllResources(config);
       resolve('fetched');
     });
   }
 
-  return { resources, all, filtered, fetchResources, count }
+  return { resources, filtered, count, fetchResources }
 })
