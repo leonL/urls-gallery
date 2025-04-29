@@ -15,14 +15,8 @@ interface ApiResponse {
   records: ApiResource[]
 }
 
-interface Config {
-  public: {
-    apiBase: string;
-  };
-  airtableApiKey: string;
-}
-
-export async function getAllResources(config: Config): Promise<StoreResource[]> {
+export async function getAllResources(): Promise<StoreResource[]> {
+  const config = useRuntimeConfig();
   let allRecords: StoreResource[] = [];
   let allResourcesFetched = false;
   let offsetToken = '';
