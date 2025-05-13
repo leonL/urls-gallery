@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import { getAllRows } from '~/shared/api/data';
+import { fetchResourceRows } from '~/shared/api/data';
 
 interface Resource { 
   id: number,
@@ -17,7 +17,7 @@ export const useResourceStore = defineStore('resources', () => {
 
   function fetch() {
     return new Promise(async (resolve) => {
-      const response = await getAllRows('RESOURCES', 'POST');
+      const response = await fetchResourceRows();
 
       resources.value = response.map((record, id) => ({
         id, 

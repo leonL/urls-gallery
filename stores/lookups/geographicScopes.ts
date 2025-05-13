@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { getAllRows } from '~/shared/api/data';
+import { fetchLookupRows } from '~/shared/api/data';
 import { lookupNameInStore, mapRowsToLookupStore, type Lookup } from './base';
 
 export const useGeoScopeLookupStore = defineStore('geographicScopes', () => {
@@ -8,7 +8,7 @@ export const useGeoScopeLookupStore = defineStore('geographicScopes', () => {
 
   function fetch() {
     return new Promise(async (resolve) => {
-      const rows = await getAllRows('GEOGRAPHIC SCOPES');
+      const rows = await fetchLookupRows('GEOGRAPHIC SCOPES');
 
       geographicScopes.value = mapRowsToLookupStore(rows);
 
