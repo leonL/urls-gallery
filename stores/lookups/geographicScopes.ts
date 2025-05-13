@@ -8,7 +8,7 @@ interface Lookup {
   fr: string
 }
 
-export const useGeoScopeStore = defineStore('geographicScopes', () => {
+export const useGeoScopeLookupStore = defineStore('geographicScopes', () => {
   const geographicScopes = ref<Lookup[]>([]);
 
   function fetch() {

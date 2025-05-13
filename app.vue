@@ -1,9 +1,9 @@
 <script setup lang="ts">
   import { useResourceStore } from './stores/resources';
-  import { useGeoScopeStore } from './stores/lookups/geographicScopes';
+  import { useGeoScopeLookupStore } from './stores/lookups/geographicScopes';
   
   const resourceStore = useResourceStore();
-  const geoScopeLookup = useGeoScopeStore();
+  const geoScopeLookup = useGeoScopeLookupStore();
   await callOnce('resources', () => resourceStore.fetch());
   await callOnce('categories', () => geoScopeLookup.fetch());
 
