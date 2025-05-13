@@ -2,7 +2,7 @@ interface ApiResource {
   id: string,
   fields: {
     [key: string]: string;
-  };
+  }
 }
 
 interface ApiResponse {
