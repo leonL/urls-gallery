@@ -1,10 +1,11 @@
 <script setup lang="ts">
-  import { useResourceStore, useCategoryStore } from './stores/resources';
+  import { useResourceStore } from './stores/resources';
+  import { useGeoScopeStore } from './stores/lookups/geographicScopes';
   
   const resourceStore = useResourceStore();
-  const categoryStore = useCategoryStore();
+  const geoScopeLookup = useGeoScopeStore();
   await callOnce('resources', () => resourceStore.fetch());
-  await callOnce('categories', () => categoryStore.fetch());
+  await callOnce('categories', () => geoScopeLookup.fetch());
 
 </script>
 
@@ -12,9 +13,9 @@
   <div>
     <h1>{{ resourceStore.count }} Resources</h1>
     <ul>
-      <li v-for="resource in resourceStore.filtered" :key="resource.id">
-        <p>{{ resource.enTitle }}</p>
-        <p>{{ categoryStore.getByTypeId('geographicScopes', resource.geographicScopeId, 'fr') }}</p>
+      <li v-for="r in resourceStore.filtered" :key="r.id">
+        <p>{{ r.enTitle }}</p>
+        <p>{{ geoScopeLookup.getNameById(r.geographicScopeId, 'fr') }}</p>
       </li>
     </ul>
   </div>

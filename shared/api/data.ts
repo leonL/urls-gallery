@@ -5,7 +5,6 @@ interface ApiResource {
   };
 }
 
-
 interface ApiResponse {
   offset: string,
   records: ApiResource[]
