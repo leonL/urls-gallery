@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import { getAllRows } from '~/shared/api/data';
 
-interface StoreResource {
+interface Resource { 
   id: number,
   enTitle: string,
   frTitle: string,
@@ -10,7 +10,7 @@ interface StoreResource {
 }
 
 export const useResourceStore = defineStore('resources', () => {
-  const resources = ref<StoreResource[]>([]);
+  const resources = ref<Resource[]>([]);
 
   const filtered = computed(() => resources.value.slice(0, 10));
   const count = computed(() => resources.value.length);
