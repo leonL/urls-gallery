@@ -6,10 +6,12 @@ interface Resource {
   id: number,
   enTitle: string,
   frTitle: string,
-  geographicScopeId: string
+  languageId: string,
+  geographicScopeId: string,
+  contentTypeIds: Array<string>
 }
 
-export const useResourceStore = defineStore('resources', () => {
+export const useResourceStore = defineStore('resource', () => {
   const resources = ref<Resource[]>([]);
 
   const filtered = computed(() => resources.value.slice(0, 10));
@@ -19,11 +21,13 @@ export const useResourceStore = defineStore('resources', () => {
     return new Promise(async (resolve) => {
       const response = await fetchResourceRows();
 
-      resources.value = response.map((record, id) => ({
+      resources.value = response.map((r, id) => ({
         id, 
-        enTitle: record.fields['TITLE EN'],
-        frTitle: record.fields['TITLE FR'],
-        geographicScopeId: record.fields['GEOGRAPHIC SCOPE ID'][0]
+        enTitle: r.fields['TITLE EN'],
+        frTitle: r.fields['TITLE FR'],
+        languageId: r.fields['LANGUAGE ID'][0],
+        geographicScopeId: r.fields['GEOGRAPHIC SCOPE ID'][0],
+        contentTypeIds: r.fields['CONTENT TYPE IDS']
       }));
 
       resolve('fetched');

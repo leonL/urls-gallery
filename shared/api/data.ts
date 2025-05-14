@@ -3,7 +3,9 @@ interface ApiResourceRow {
   fields: {
     ['TITLE EN']: string,
     ['TITLE FR']: string,
-    ['GEOGRAPHIC SCOPE ID']: Array<string>
+    ['LANGUAGE ID']: Array<string>,
+    ['GEOGRAPHIC SCOPE ID']: Array<string>,
+    ['CONTENT TYPE IDS']: Array<string>
   }
 }
 
