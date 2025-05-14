@@ -8,7 +8,10 @@ interface Resource {
   frTitle: string,
   languageId: string,
   geographicScopeId: string,
-  contentTypeIds: Array<string>
+  publicationId: string,
+  contentTypeIds: Array<string>,
+  organizationIds: Array<string>,
+  issueIds: Array<string>
 }
 
 export const useResourceStore = defineStore('resource', () => {
@@ -27,7 +30,10 @@ export const useResourceStore = defineStore('resource', () => {
         frTitle: r.fields['TITLE FR'],
         languageId: r.fields['LANGUAGE ID'][0],
         geographicScopeId: r.fields['GEOGRAPHIC SCOPE ID'][0],
-        contentTypeIds: r.fields['CONTENT TYPE IDS']
+        publicationId: r.fields['PUBLICATION ID'][0],
+        contentTypeIds: r.fields['CONTENT TYPE IDS'],
+        organizationIds: r.fields['ORGANIZATION IDS'],
+        issueIds: r.fields['ISSUE IDS']
       }));
 
       resolve('fetched');

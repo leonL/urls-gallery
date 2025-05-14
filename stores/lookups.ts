@@ -15,15 +15,14 @@ interface LookupStore {
 const apiPaths = {
   geoScopes: 'GEOGRAPHIC SCOPES',
   languages: 'LANGUAGES',
-  contentTypes: 'CONTENT TYPES'
+  contentTypes: 'CONTENT TYPES',
+  organizations: 'ORGANIZATIONS',
+  publications: 'PUBLICATIONS',
+  issues: 'ISSUES'
 }
 
 export const useLookupStore = defineStore('lookup', () => {
-  const lookups = ref<LookupStore>({
-    geoScopes: <Lookup[]>[],
-    languages: <Lookup[]>[],
-    contentTypes: <Lookup[]>[]
-  });
+  const lookups = ref<LookupStore>({});
 
   function fetch() {
     return new Promise(async (resolve) => {

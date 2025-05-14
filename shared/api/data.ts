@@ -5,7 +5,10 @@ interface ApiResourceRow {
     ['TITLE FR']: string,
     ['LANGUAGE ID']: Array<string>,
     ['GEOGRAPHIC SCOPE ID']: Array<string>,
-    ['CONTENT TYPE IDS']: Array<string>
+    ['PUBLICATION ID']: Array<string>,
+    ['CONTENT TYPE IDS']: Array<string>,
+    ['ORGANIZATION IDS']: Array<string>,
+    ['ISSUE IDS']: Array<string>
   }
 }
 
