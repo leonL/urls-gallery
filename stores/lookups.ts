@@ -20,9 +20,9 @@ const apiPaths = {
 
 export const useLookupStore = defineStore('lookup', () => {
   const lookups = ref<LookupStore>({
-    geoScopes: [],
-    languages: [],
-    contentTypes: []
+    geoScopes: <Lookup[]>[],
+    languages: <Lookup[]>[],
+    contentTypes: <Lookup[]>[]
   });
 
   function fetch() {
@@ -46,7 +46,7 @@ export const useLookupStore = defineStore('lookup', () => {
     return label;
   }
 
-  return { getLabel, fetch }
+  return { lookups, getLabel, fetch }
 });
 
 async function fetchFromPath(table: string) {
