@@ -28,9 +28,9 @@ export const useResourceStore = defineStore('resource', () => {
         id, 
         enTitle: r.fields['TITLE EN'],
         frTitle: r.fields['TITLE FR'],
-        languageId: r.fields['LANGUAGE ID'][0],
-        geographicScopeId: r.fields['GEOGRAPHIC SCOPE ID'][0],
-        publicationId: r.fields['PUBLICATION ID'][0],
+        languageId: getZeroIndexOrBlank(r.fields['LANGUAGE ID']),
+        geographicScopeId: getZeroIndexOrBlank(r.fields['GEOGRAPHIC SCOPE ID']),
+        publicationId: getZeroIndexOrBlank(r.fields['PUBLICATION ID']),
         contentTypeIds: r.fields['CONTENT TYPE IDS'],
         organizationIds: r.fields['ORGANIZATION IDS'],
         issueIds: r.fields['ISSUE IDS']
@@ -42,3 +42,9 @@ export const useResourceStore = defineStore('resource', () => {
 
   return { resources, filtered, count, fetch }
 })
+
+function getZeroIndexOrBlank(a: Array<string> | undefined) {
+  let str = '';
+  if (a !== undefined && a.length > 0) str = a[0];
+  return str;
+}
