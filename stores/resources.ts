@@ -7,6 +7,10 @@ interface Resource {
   enTitle: string,
   frTitle: string,
   languageId: string,
+  linkEn: string,
+  urlEn: string,
+  linkFr: string,
+  urlFr: string,
   geographicScopeId: string,
   pubId: string,
   contentTypeIds: Array<string>,
@@ -26,6 +30,12 @@ export const useResourceStore = defineStore('resource', () => {
     let valid = resources.value;
     valid = valid.filter((r) => r.languageId !== '');
     valid = valid.filter((r) => r.pubYear !== undefined);
+    valid = valid.filter((r) => {
+      return (r.languageId === 'en' || r.languageId === 'both') ? r.linkEn !== undefined || r.urlEn !== undefined : true;
+    });
+    valid = valid.filter((r) => {
+      return (r.languageId === 'fr' || r.languageId === 'both') ? r.linkFr !== undefined || r.urlFr !== undefined : true;
+    });
     return valid;
   }); 
   const validCount = computed(() => valid.value.length);
@@ -43,6 +53,10 @@ export const useResourceStore = defineStore('resource', () => {
           enTitle: f['TITLE EN'],
           frTitle: f['TITLE FR'],
           languageId: getZeroIndexOrBlank(f['LANGUAGE ID']),
+          linkEn: f['DOCUMENT EN'],
+          urlEn: f['LINK EN'],
+          linkFr: f['DOCUMENT FR'],
+          urlFr: f['LINK FR'],
           geographicScopeId: getZeroIndexOrBlank(f['GEOGRAPHIC SCOPE ID']),
           pubId: getZeroIndexOrBlank(f['PUBLICATION ID']),
           contentTypeIds: f['CONTENT TYPE IDS'],
