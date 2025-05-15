@@ -15,6 +15,7 @@
     <ul>
       <li v-for="r in resourceStore.filtered" :key="r.id">
         <p>{{ r.enTitle }}</p>
+        <p>{{ r.pubYear }}</p>
         <p>{{ lookupStore.getLabel('geoScopes', r.geographicScopeId, 'fr') }}</p>
         <p>{{ lookupStore.getLabel('languages', r.languageId) }}</p>
         <p>{{ lookupStore.getLabel('contentTypes', r.languageId) }}</p>

@@ -8,10 +8,13 @@ interface Resource {
   frTitle: string,
   languageId: string,
   geographicScopeId: string,
-  publicationId: string,
+  pubId: string,
   contentTypeIds: Array<string>,
   organizationIds: Array<string>,
-  issueIds: Array<string>
+  issueIds: Array<string>,
+  pubYear: number,
+  pubMonth: number,
+  pubDay: number
 }
 
 export const useResourceStore = defineStore('resource', () => {
@@ -24,17 +27,23 @@ export const useResourceStore = defineStore('resource', () => {
     return new Promise(async (resolve) => {
       const response = await fetchResourceRows();
 
-      resources.value = response.map((r, id) => ({
-        id, 
-        enTitle: r.fields['TITLE EN'],
-        frTitle: r.fields['TITLE FR'],
-        languageId: getZeroIndexOrBlank(r.fields['LANGUAGE ID']),
-        geographicScopeId: getZeroIndexOrBlank(r.fields['GEOGRAPHIC SCOPE ID']),
-        publicationId: getZeroIndexOrBlank(r.fields['PUBLICATION ID']),
-        contentTypeIds: r.fields['CONTENT TYPE IDS'],
-        organizationIds: r.fields['ORGANIZATION IDS'],
-        issueIds: r.fields['ISSUE IDS']
-      }));
+      resources.value = response.map((r, id) => {
+        const resource = {
+          id, 
+          enTitle: r.fields['TITLE EN'],
+          frTitle: r.fields['TITLE FR'],
+          languageId: getZeroIndexOrBlank(r.fields['LANGUAGE ID']),
+          geographicScopeId: getZeroIndexOrBlank(r.fields['GEOGRAPHIC SCOPE ID']),
+          pubId: getZeroIndexOrBlank(r.fields['PUBLICATION ID']),
+          contentTypeIds: r.fields['CONTENT TYPE IDS'],
+          organizationIds: r.fields['ORGANIZATION IDS'],
+          issueIds: r.fields['ISSUE IDS'],
+          pubYear: r.fields['PUBLICATION YEAR'],
+          pubMonth: r.fields['PUBLICATION MONTH'],
+          pubDay: r.fields['PUBLICATION DAY']
+        }
+        return resource;
+    });
 
       resolve('fetched');
     });
