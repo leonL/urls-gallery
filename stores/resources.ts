@@ -19,28 +19,37 @@ interface Resource {
 
 export const useResourceStore = defineStore('resource', () => {
   const resources = ref<Resource[]>([]);
-
-  const filtered = computed(() => resources.value.slice(0, 10));
+  
   const count = computed(() => resources.value.length);
+  
+  const valid = computed(() => {
+    return resources.value.filter((r) => {
+      return r.languageId !== '' && r.pubYear !== undefined;
+    });
+  }); 
+  const validCount = computed(() => valid.value.length);
+  
+  const filtered = computed(() => resources.value.slice(0, 10));
 
   function fetch() {
     return new Promise(async (resolve) => {
       const response = await fetchResourceRows();
 
       resources.value = response.map((r, id) => {
+        const f = r.fields;
         const resource = {
           id, 
-          enTitle: r.fields['TITLE EN'],
-          frTitle: r.fields['TITLE FR'],
-          languageId: getZeroIndexOrBlank(r.fields['LANGUAGE ID']),
-          geographicScopeId: getZeroIndexOrBlank(r.fields['GEOGRAPHIC SCOPE ID']),
-          pubId: getZeroIndexOrBlank(r.fields['PUBLICATION ID']),
-          contentTypeIds: r.fields['CONTENT TYPE IDS'],
-          organizationIds: r.fields['ORGANIZATION IDS'],
-          issueIds: r.fields['ISSUE IDS'],
-          pubYear: r.fields['PUBLICATION YEAR'],
-          pubMonth: r.fields['PUBLICATION MONTH'],
-          pubDay: r.fields['PUBLICATION DAY']
+          enTitle: f['TITLE EN'],
+          frTitle: f['TITLE FR'],
+          languageId: getZeroIndexOrBlank(f['LANGUAGE ID']),
+          geographicScopeId: getZeroIndexOrBlank(f['GEOGRAPHIC SCOPE ID']),
+          pubId: getZeroIndexOrBlank(f['PUBLICATION ID']),
+          contentTypeIds: f['CONTENT TYPE IDS'],
+          organizationIds: f['ORGANIZATION IDS'],
+          issueIds: f['ISSUE IDS'],
+          pubYear: f['PUBLICATION YEAR'],
+          pubMonth: f['PUBLICATION MONTH'],
+          pubDay: f['PUBLICATION DAY']
         }
         return resource;
     });
@@ -49,7 +58,7 @@ export const useResourceStore = defineStore('resource', () => {
     });
   }
 
-  return { resources, filtered, count, fetch }
+  return { resources, count, valid, validCount, filtered, fetch }
 })
 
 function getZeroIndexOrBlank(a: Array<string> | undefined) {

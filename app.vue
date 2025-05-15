@@ -11,9 +11,10 @@
 
 <template>
   <div>
-    <h1>{{ resourceStore.count }} Resources</h1>
+    <h1>{{ resourceStore.validCount }} Valid Resources</h1>
+    <h5>{{ resourceStore.count }} Resources</h5>
     <ul>
-      <li v-for="r in resourceStore.filtered" :key="r.id">
+      <li v-for="r in resourceStore.valid" :key="r.id">
         <p>{{ r.enTitle }}</p>
         <p>{{ r.pubYear }}</p>
         <p>{{ lookupStore.getLabel('geoScopes', r.geographicScopeId, 'fr') }}</p>
