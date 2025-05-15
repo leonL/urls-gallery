@@ -23,9 +23,10 @@ export const useResourceStore = defineStore('resource', () => {
   const count = computed(() => resources.value.length);
   
   const valid = computed(() => {
-    return resources.value.filter((r) => {
-      return r.languageId !== '' && r.pubYear !== undefined;
-    });
+    let valid = resources.value;
+    valid = valid.filter((r) => r.languageId !== '');
+    valid = valid.filter((r) => r.pubYear !== undefined);
+    return valid;
   }); 
   const validCount = computed(() => valid.value.length);
   
