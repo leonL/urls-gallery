@@ -7,6 +7,10 @@ interface Resource {
   enTitle: string,
   frTitle: string,
   languageId: string,
+  linkEn: string,
+  urlEn: string,
+  linkFr: string,
+  urlFr: string,
   geographicScopeId: string,
   pubId: string,
   contentTypeIds: Array<string>,
@@ -22,11 +26,7 @@ export const useResourceStore = defineStore('resource', () => {
   
   const count = computed(() => resources.value.length);
   
-  const valid = computed(() => {
-    return resources.value.filter((r) => {
-      return r.languageId !== '' && r.pubYear !== undefined;
-    });
-  }); 
+  const valid = computed(() => resources.value.filter((r) => isValid(r)) ); 
   const validCount = computed(() => valid.value.length);
   
   const filtered = computed(() => resources.value.slice(0, 10));
@@ -42,6 +42,10 @@ export const useResourceStore = defineStore('resource', () => {
           enTitle: f['TITLE EN'],
           frTitle: f['TITLE FR'],
           languageId: getZeroIndexOrBlank(f['LANGUAGE ID']),
+          linkEn: f['DOCUMENT EN'],
+          urlEn: f['LINK EN'],
+          linkFr: f['DOCUMENT FR'],
+          urlFr: f['LINK FR'],
           geographicScopeId: getZeroIndexOrBlank(f['GEOGRAPHIC SCOPE ID']),
           pubId: getZeroIndexOrBlank(f['PUBLICATION ID']),
           contentTypeIds: f['CONTENT TYPE IDS'],
@@ -60,6 +64,21 @@ export const useResourceStore = defineStore('resource', () => {
 
   return { resources, count, valid, validCount, filtered, fetch }
 })
+
+function isValid(r: Resource) {
+  let valid = hasField(r, 'pubYear') && hasField(r, 'languageId');
+  if (valid && r.languageId === 'en' || r.languageId === 'both') {
+    valid = hasField(r, 'linkEn') || hasField(r, 'urlEn');
+  }
+  if (valid && r.languageId === 'fr' || r.languageId === 'both') {
+    valid = hasField(r, 'linkFr') || hasField(r, 'urlFr');
+  }
+  return valid;
+}
+
+function hasField(r: Resource, field: keyof Resource) {
+  return r[field] !== undefined && r[field] !== '';
+}
 
 function getZeroIndexOrBlank(a: Array<string> | undefined) {
   let str = '';
