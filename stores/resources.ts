@@ -4,13 +4,19 @@ import { fetchResourceRows } from '~/shared/api/data';
 
 export interface Resource { 
   id: number,
-  enTitle: string,
-  frTitle: string,
   languageId: string,
-  linkEn: string,
-  urlEn: string,
-  linkFr: string,
-  urlFr: string,
+  title: {
+    en: string;
+    fr: string;
+  },
+  docUrl: {
+    en: string;
+    fr: string;
+  },
+  webUrl: {
+    en: string;
+    fr: string;
+  },
   geographicScopeId: string,
   pubId: string,
   contentTypeIds: Array<string>,
@@ -39,13 +45,19 @@ export const useResourceStore = defineStore('resource', () => {
         const f = r.fields;
         const resource = {
           id, 
-          enTitle: f['TITLE EN'],
-          frTitle: f['TITLE FR'],
           languageId: getZeroIndexOrBlank(f['LANGUAGE ID']),
-          linkEn: f['DOCUMENT EN'],
-          urlEn: f['LINK EN'],
-          linkFr: f['DOCUMENT FR'],
-          urlFr: f['LINK FR'],
+          title: {
+            en: f['TITLE EN'],
+            fr: f['TITLE FR']
+          },
+          docUrl: {
+            en: getDocUrlOrBlank(f['DOCUMENT EN']),
+            fr: getDocUrlOrBlank(f['DOCUMENT FR']),
+          },
+          webUrl: {
+            en: f['LINK EN'],
+            fr: f['LINK FR'],
+          },
           geographicScopeId: getZeroIndexOrBlank(f['GEOGRAPHIC SCOPE ID']),
           pubId: getZeroIndexOrBlank(f['PUBLICATION ID']),
           contentTypeIds: f['CONTENT TYPE IDS'],
@@ -66,18 +78,24 @@ export const useResourceStore = defineStore('resource', () => {
 })
 
 function isValid(r: Resource) {
-  let valid = hasField(r, 'pubYear') && hasField(r, 'languageId');
-  if (valid && r.languageId === 'en' || r.languageId === 'both') {
-    valid = hasField(r, 'linkEn') || hasField(r, 'urlEn');
+  let valid = isNotBlank(r.pubYear) && isNotBlank(r.languageId);
+  if (valid && (r.languageId === 'en' || r.languageId === 'both')) {
+    valid = isNotBlank(r.docUrl.en) || isNotBlank(r.webUrl.en);
   }
-  if (valid && r.languageId === 'fr' || r.languageId === 'both') {
-    valid = hasField(r, 'linkFr') || hasField(r, 'urlFr');
+  if (valid && (r.languageId === 'fr' || r.languageId === 'both')) {
+    valid = isNotBlank(r.docUrl.fr) || isNotBlank(r.webUrl.fr);
   }
   return valid;
 }
 
-function hasField(r: Resource, field: keyof Resource) {
-  return r[field] !== undefined && r[field] !== '';
+function isNotBlank(value: string | number) {
+  return value !== undefined && value !== '';
+}
+
+function getDocUrlOrBlank(docData: Array<{url: string}> | undefined) {
+  let url = '';
+  if (docData !== undefined) url = docData[0].url;
+  return url;
 }
 
 function getZeroIndexOrBlank(a: Array<string> | undefined) {
