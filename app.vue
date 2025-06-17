@@ -2,7 +2,7 @@
   import { useResourceStore } from './stores/resources';
   import { useLookupStore } from './stores/lookups';
 
-  const { locales, setLocale } = useI18n()
+  const { locales, setLocale } = useI18n();
   
   const resourceStore = useResourceStore();
   await callOnce('resources', () => resourceStore.fetch());
