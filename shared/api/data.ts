@@ -1,12 +1,12 @@
 interface ApiResourceRow {
   id: string,
   fields: {
+    ['LANGUAGE ID']: Array<string>,
     ['TITLE EN']: string,
     ['TITLE FR']: string,
-    ['LANGUAGE ID']: Array<string>,
-    ['DOCUMENT EN']: string,
+    ['DOCUMENT EN']: Array<{url: string}>,
+    ['DOCUMENT FR']: Array<{url: string}>,
     ['LINK EN']: string,
-    ['DOCUMENT FR']: string,
     ['LINK FR']: string,
     ['GEOGRAPHIC SCOPE ID']: Array<string>,
     ['PUBLICATION ID']: Array<string>,
