@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import { fetchResourceRows } from '~/shared/api/data';
 
-interface Resource { 
+export interface Resource { 
   id: number,
   enTitle: string,
   frTitle: string,
