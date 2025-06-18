@@ -55,6 +55,26 @@
     return lookupStore.getLabel('publications', pubId, rLang.value);
   });
 
+  const publicationDate = computed(() => {
+    const pubYear = props.r.pubYear;
+    let pubDateStr = String(pubYear);
+
+    if (props.r.pubMonth !== undefined) {
+      let pubDateObj = new Date(pubYear, props.r.pubMonth);
+      let dateFormat: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long' };
+      let timeFormatLocale = locale.value === 'en' ? 'en-US' : 'fr';
+
+      if (props.r.pubDay !== undefined) {
+        dateFormat.day = 'numeric';
+        pubDateObj.setDate(props.r.pubDay);
+      }
+
+      pubDateStr = new Intl.DateTimeFormat(timeFormatLocale, dateFormat).format(pubDateObj);
+    }
+
+    return pubDateStr;
+  });
+
 </script>
 
 <template>
@@ -73,6 +93,9 @@
       </div>
       <div v-if="hasPublication" class="publication">
         <span>{{ publication }}</span>
+      </div>
+      <div class="publication-date">
+        <span>{{ $t('published') }} {{ publicationDate }}</span>
       </div>
      </div>
   </li>
