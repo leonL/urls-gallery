@@ -17,6 +17,7 @@ export interface Resource {
     en: string;
     fr: string;
   },
+  author: string,
   geographicScopeId: string,
   pubId: string,
   contentTypeIds: Array<string>,
@@ -58,6 +59,7 @@ export const useResourceStore = defineStore('resource', () => {
             en: f['LINK EN'],
             fr: f['LINK FR'],
           },
+          author: f['AUTHOR'],
           geographicScopeId: getZeroIndexOrBlank(f['GEOGRAPHIC SCOPE ID']),
           pubId: getZeroIndexOrBlank(f['PUBLICATION ID']),
           contentTypeIds: f['CONTENT TYPE IDS'],
