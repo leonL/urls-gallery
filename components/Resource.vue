@@ -39,7 +39,9 @@
 
     <h1 class="title">
       <a :href="url" target="_blank">{{ title }}</a>
+      <span class="pdf" v-if="hasDocUrl">PDF</span>
     </h1>
+
   </li>
 </template>
   
