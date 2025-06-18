@@ -46,6 +46,15 @@
     return orgsArray.join(", ");
   });
 
+  const hasPublication = computed(() => {
+    return props.r.publicationId !== '';
+  });
+
+  const publication = computed(() => {
+    const pubId = props.r.publicationId;
+    return lookupStore.getLabel('publications', pubId, rLang.value);
+  });
+
 </script>
 
 <template>
@@ -62,7 +71,10 @@
         <span v-if="hasAuthor && hasOrganizations"> &#8226; </span>
         <span v-if="hasOrganizations">{{ organizations }}</span>
       </div>
-    </div>
+      <div v-if="hasPublication" class="publication">
+        <span>{{ publication }}</span>
+      </div>
+     </div>
   </li>
 </template>
   
