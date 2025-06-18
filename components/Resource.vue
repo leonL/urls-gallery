@@ -30,6 +30,10 @@
     return url;
   });
 
+  const hasAuthor = computed(() => {
+    return props.r.author !== undefined &&  props.r.author !== '';
+  });
+
   // const lookupStore = useLookupStore();
 
 </script>
@@ -42,6 +46,11 @@
       <span class="pdf" v-if="hasDocUrl">PDF</span>
     </h1>
 
+     <div class="accreditation">
+      <div>
+        <span v-if="hasAuthor">{{ props.r.author }} &#8226;</span>
+      </div>
+    </div>
   </li>
 </template>
   
