@@ -1,6 +1,8 @@
 <script setup lang="ts">
   import type { Resource } from '~/stores/resources';
   import { useLookupStore } from '~/stores/lookups';
+
+  const lookupStore = useLookupStore();
   
   const props = defineProps<{
     r: Resource
@@ -34,7 +36,15 @@
     return props.r.author !== undefined &&  props.r.author !== '';
   });
 
-  // const lookupStore = useLookupStore();
+  const hasOrganizations = computed(() => {
+    return props.r.organizationIds !== undefined &&  props.r.organizationIds.length > 0;
+  });
+
+  const organizations = computed(() => {
+    const orgIds = props.r.organizationIds;
+    const orgsArray = lookupStore.getLabels('organizations', orgIds, rLang.value);
+    return orgsArray.join(", ");
+  });
 
 </script>
 
@@ -48,7 +58,9 @@
 
      <div class="accreditation">
       <div>
-        <span v-if="hasAuthor">{{ props.r.author }} &#8226;</span>
+        <span v-if="hasAuthor">{{ props.r.author }}</span>
+        <span v-if="hasAuthor && hasOrganizations"> &#8226; </span>
+        <span v-if="hasOrganizations">{{ organizations }}</span>
       </div>
     </div>
   </li>

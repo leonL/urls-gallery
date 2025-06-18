@@ -45,7 +45,11 @@ export const useLookupStore = defineStore('lookup', () => {
     return label;
   }
 
-  return { lookups, getLabel, fetch }
+  function getLabels(store: string, ids: Array<string>, locale: 'en' | 'fr' = 'en') {
+    return ids.map(id => getLabel(store, id, locale));
+  }
+
+  return { lookups, getLabel, getLabels, fetch }
 });
 
 async function fetchFromPath(table: string) {
