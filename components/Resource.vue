@@ -107,6 +107,17 @@
     return lookupStore.getLabel('geoScopes', geoScopeId, rLang.value);
   });
 
+  const hasContentType = computed(() => {
+    const cTypeIds = props.r.contentTypeIds;
+    return cTypeIds !== undefined &&  cTypeIds.length > 0;
+  });
+
+  const contentTypesStr = computed(() => {
+    const cTypeIds = props.r.contentTypeIds;
+    const cTypesArray = lookupStore.getLabels('contentTypes', cTypeIds, locale.value);
+    return cTypesArray.join("; ");
+  });
+
 </script>
 
 <template>
@@ -146,6 +157,10 @@
       <div class='tag-list' id='geo-scope'>
         <img class="icon" src="~/assets/globe.png">
         <span>{{ geographicScope }}</span>
+      </div>
+      <div v-if="hasContentType" class='tag-list' id='content-types'>
+        <img class="icon" src="~/assets/content-type.png">
+        <span>{{ contentTypesStr }}</span> 
       </div>
     </div>
 
