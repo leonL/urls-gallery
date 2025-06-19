@@ -109,29 +109,35 @@
 
   const hasContentType = computed(() => {
     const cTypeIds = props.r.contentTypeIds;
-    return cTypeIds !== undefined &&  cTypeIds.length > 0;
+    return isNotEmpty(cTypeIds);
   });
 
   const contentTypesStr = computed(() => {
     const cTypeIds = props.r.contentTypeIds;
     const cTypesArray = lookupStore.getLabels('contentTypes', cTypeIds, locale.value)
-      .filter(item => item !== undefined).filter(item => item !== '');
-    cTypesArray.sort((a, b) => a.localeCompare(b, locale.value));
-    return cTypesArray.join("; ");
+    return formatTagsStr(cTypesArray);
   });
 
   const hasIssues = computed(() => {
     const issuesIds = props.r.issueIds;
-    return issuesIds !== undefined &&  issuesIds.length > 0;
+    return isNotEmpty(issuesIds);
   });
 
   const issuesStr = computed(() => {
     const issuesIds = props.r.issueIds;
-    const issuesArray = lookupStore.getLabels('issues', issuesIds, locale.value)
-      .filter(item => item !== undefined).filter(item => item !== '');
-    issuesArray.sort((a, b) => a.localeCompare(b, locale.value));
-    return issuesArray.join("; ");
+    const issuesArray = lookupStore.getLabels('issues', issuesIds, locale.value);
+    return formatTagsStr(issuesArray);
   });
+
+  function formatTagsStr(a: Array<string | undefined>) {
+    const filtered = a.filter(item => item !== undefined).filter(item => item !== '');
+    filtered.sort((a, b) => a.localeCompare(b, locale.value));
+    return filtered.join("; ")
+  }
+
+  function isNotEmpty(a: Array<any>) {
+    return a !== undefined && a.length > 0;
+  }
 
 </script>
 
