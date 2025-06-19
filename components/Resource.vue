@@ -27,8 +27,27 @@
     return docUrl !== '';
   });
 
+  const hasTranslationDocUrl = computed(() => {
+    const docUrl = props.r.docUrl[rTransLang.value];
+    return docUrl !== '';
+  });
+
   const url = computed(() => {
     const url = hasDocUrl.value ? props.r.docUrl[rLang.value] : props.r.webUrl[rLang.value];
+    return url;
+  });
+
+  const rTransLang = computed(() => {
+    return rLang.value === 'en' ? "fr" : "en";
+  });
+
+  const translationUrl = computed(() => {
+    let url = '';
+    if (hasTranslation) {
+      const r = props.r;
+      const lang = rTransLang.value;
+      url = hasTranslationDocUrl.value ? r.docUrl[lang] : r.webUrl[lang];
+    }
     return url;
   });
 
@@ -110,6 +129,13 @@
      <div v-if="hasNotes" class="notes">
        <MDC :value="notes" />
      </div>
+
+     <div v-if="hasTranslation" class="translation">
+      <span class="available">
+        {{ $t('availableIn') }}
+        <a :href="translationUrl" target="_blank">{{ $t(`${rTransLang}`) }}</a>
+      </span> 
+    </div>
 
   </li>
 </template>

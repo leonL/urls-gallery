@@ -1,8 +1,10 @@
 {
   "welcome": "Bienvenue",
   "home": "Accueil",
+  "en": "anglais",
+  "fr": "français",
   "homeTitle": "Bibliothèque de ressources",
-  "frAvailable": "Aussi disponible en français",
+  "availableIn": "Aussi disponible en",
   "filters": "Autres filtres",
   "publicationYear": "Année de publication",
   "language": "Langue",
