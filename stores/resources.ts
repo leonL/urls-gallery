@@ -17,6 +17,10 @@ export interface Resource {
     en: string;
     fr: string;
   },
+  notes: {
+    en: string;
+    fr: string;
+  },
   author: string,
   geographicScopeId: string,
   publicationId: string,
@@ -53,11 +57,15 @@ export const useResourceStore = defineStore('resource', () => {
           },
           docUrl: {
             en: getDocUrlOrBlank(f['DOCUMENT EN']),
-            fr: getDocUrlOrBlank(f['DOCUMENT FR']),
+            fr: getDocUrlOrBlank(f['DOCUMENT FR'])
           },
           webUrl: {
             en: f['LINK EN'],
-            fr: f['LINK FR'],
+            fr: f['LINK FR']
+          },
+          notes: {
+            en: f['NOTES EN'],
+            fr: f['NOTES FR']
           },
           author: f['AUTHOR'],
           geographicScopeId: getZeroIndexOrBlank(f['GEOGRAPHIC SCOPE ID']),

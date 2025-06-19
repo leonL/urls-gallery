@@ -75,6 +75,14 @@
     return pubDateStr;
   });
 
+  const notes = computed(() => {
+    return props.r.notes[locale.value];
+  });
+
+  const hasNotes = computed(() => {
+    return notes.value !== undefined && notes.value !== '';
+  });
+
 </script>
 
 <template>
@@ -98,6 +106,11 @@
         <span>{{ $t('published') }} {{ publicationDate }}</span>
       </div>
      </div>
+
+     <div v-if="hasNotes" class="notes">
+       <MDC :value="notes" />
+     </div>
+
   </li>
 </template>
   
