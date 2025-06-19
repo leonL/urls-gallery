@@ -23,13 +23,11 @@
   });
 
   const hasDocUrl = computed(() => {
-    const docUrl = props.r.docUrl[rLang.value];
-    return docUrl !== '';
+    return isNotBlank(props.r.docUrl[rLang.value]);
   });
 
   const hasTranslationDocUrl = computed(() => {
-    const docUrl = props.r.docUrl[rTransLang.value];
-    return docUrl !== '';
+    return isNotBlank(props.r.docUrl[rTransLang.value]);
   });
 
   const url = computed(() => {
@@ -52,11 +50,11 @@
   });
 
   const hasAuthor = computed(() => {
-    return props.r.author !== undefined &&  props.r.author !== '';
+    return isNotBlank(props.r.author);
   });
 
   const hasOrganizations = computed(() => {
-    return props.r.organizationIds !== undefined &&  props.r.organizationIds.length > 0;
+    return isNotEmpty(props.r.organizationIds);
   });
 
   const organizations = computed(() => {
@@ -66,7 +64,7 @@
   });
 
   const hasPublication = computed(() => {
-    return props.r.publicationId !== '';
+    return isNotBlank(props.r.publicationId);
   });
 
   const publication = computed(() => {
@@ -99,7 +97,7 @@
   });
 
   const hasNotes = computed(() => {
-    return notes.value !== undefined && notes.value !== '';
+    return isNotBlank(notes.value);
   });
 
   const geographicScope = computed(() => {
@@ -137,6 +135,10 @@
 
   function isNotEmpty(a: Array<any>) {
     return a !== undefined && a.length > 0;
+  }
+
+  function isNotBlank(s: string) {
+    return s !== undefined && s !== '';
   }
 
 </script>
