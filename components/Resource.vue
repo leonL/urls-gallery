@@ -102,6 +102,11 @@
     return notes.value !== undefined && notes.value !== '';
   });
 
+  const geographicScope = computed(() => {
+    const geoScopeId = props.r.geographicScopeId;
+    return lookupStore.getLabel('geoScopes', geoScopeId, rLang.value);
+  });
+
 </script>
 
 <template>
@@ -137,21 +142,12 @@
       </span> 
     </div>
 
+    <div class='tags'>
+      <div class='tag-list' id='geo-scope'>
+        <img class="icon" src="~/assets/globe.png">
+        <span>{{ geographicScope }}</span>
+      </div>
+    </div>
+
   </li>
 </template>
-  
-  <!-- <p></p>
-  <p>{{ r.pubYear }}</p>
-  <p>{{ lookupStore.getLabel('geoScopes', r.geographicScopeId, 'fr') }}</p>
-  <p>{{ lookupStore.getLabel('languages', r.languageId) }}</p>
-  <p>{{ lookupStore.getLabel('contentTypes', r.languageId) }}</p>
-  <ul>
-    <h5>content types (english)</h5>
-    <li v-for="cTypeId in r.contentTypeIds" :key="cTypeId">
-      <p>{{ lookupStore.getLabel('contentTypes', cTypeId) }}</p>
-    </li>
-    <h5>content types (francais)</h5>
-    <li v-for="cTypeId in r.contentTypeIds" :key="cTypeId">
-      <p>{{ lookupStore.getLabel('contentTypes', cTypeId, 'fr') }}</p>
-    </li>
-  </ul> -->
