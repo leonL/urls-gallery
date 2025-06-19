@@ -1,8 +1,10 @@
 {
   "welcome": "Welcome",
   "home": "Home",
+  "en": "English",
+  "fr": "French",
   "homeTitle": "Resource library",
-  "frAvailable": "Also available in French",
+  "availableIn": "Available in",
   "filters": "Other Filters",
   "publicationYear": "Publication Year",
   "language": "Language",
