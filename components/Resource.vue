@@ -120,6 +120,19 @@
     return cTypesArray.join("; ");
   });
 
+  const hasIssues = computed(() => {
+    const issuesIds = props.r.issueIds;
+    return issuesIds !== undefined &&  issuesIds.length > 0;
+  });
+
+  const issuesStr = computed(() => {
+    const issuesIds = props.r.issueIds;
+    const issuesArray = lookupStore.getLabels('issues', issuesIds, locale.value)
+      .filter(item => item !== undefined).filter(item => item !== '');
+    issuesArray.sort((a, b) => a.localeCompare(b, locale.value));
+    return issuesArray.join("; ");
+  });
+
 </script>
 
 <template>
@@ -163,6 +176,10 @@
       <div v-if="hasContentType" class='tag-list' id='content-types'>
         <img class="icon" src="~/assets/content-type.png">
         <span>{{ contentTypesStr }}</span> 
+      </div>
+      <div v-if="hasIssues" class='tag-list' id='issues'>
+        <img class="icon" src="~/assets/issues.png">
+        <span>{{ issuesStr }}</span> 
       </div>
     </div>
 
