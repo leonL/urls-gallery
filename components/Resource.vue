@@ -114,7 +114,9 @@
 
   const contentTypesStr = computed(() => {
     const cTypeIds = props.r.contentTypeIds;
-    const cTypesArray = lookupStore.getLabels('contentTypes', cTypeIds, locale.value);
+    const cTypesArray = lookupStore.getLabels('contentTypes', cTypeIds, locale.value)
+      .filter(item => item !== undefined).filter(item => item !== '');
+    cTypesArray.sort((a, b) => a.localeCompare(b, locale.value));
     return cTypesArray.join("; ");
   });
 
