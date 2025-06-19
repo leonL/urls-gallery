@@ -8,6 +8,8 @@ interface ApiResourceRow {
     ['DOCUMENT FR']: Array<{url: string}>,
     ['LINK EN']: string,
     ['LINK FR']: string,
+    ['NOTES EN']: string,
+    ['NOTES FR']: string,
     ['AUTHOR']: string,
     ['GEOGRAPHIC SCOPE ID']: Array<string>,
     ['PUBLICATION ID']: Array<string>,
