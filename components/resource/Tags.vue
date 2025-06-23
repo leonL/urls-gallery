@@ -1,51 +1,48 @@
 <script setup lang="ts">
-import type { Resource } from '~/stores/resources';
-import { useLookupStore } from '~/stores/lookups';
+  import type { Resource } from '~/stores/resources';
+  import { useLookupStore } from '~/stores/lookups';
+  import { isNotEmpty } from '~/utils/base';
 
-const props = defineProps<{
-  r: Resource
-}>();
+  const props = defineProps<{
+    r: Resource
+  }>();
 
-const lookupStore = useLookupStore();
+  const lookupStore = useLookupStore();
 
-const { locale } = useI18n();
+  const { locale } = useI18n();
 
-function isNotEmpty(a: Array<any>) {
-  return a !== undefined && a.length > 0;
-}
+  function formatTagsStr(a: Array<string | undefined>) {
+    const filtered = a.filter(item => item !== undefined && item !== '');
+    filtered.sort((a, b) => (a ?? '').localeCompare(b ?? '', locale.value));
+    return filtered.join("; ");
+  }
 
-function formatTagsStr(a: Array<string | undefined>) {
-  const filtered = a.filter(item => item !== undefined && item !== '');
-  filtered.sort((a, b) => (a ?? '').localeCompare(b ?? '', locale.value));
-  return filtered.join("; ");
-}
+  const geographicScope = computed(() => {
+    const geoScopeId = props.r.geographicScopeId;
+    return lookupStore.getLabel('geoScopes', geoScopeId, locale.value);
+  });
 
-const geographicScope = computed(() => {
-  const geoScopeId = props.r.geographicScopeId;
-  return lookupStore.getLabel('geoScopes', geoScopeId, locale.value);
-});
+  const hasContentType = computed(() => {
+    const cTypeIds = props.r.contentTypeIds;
+    return isNotEmpty(cTypeIds);
+  });
 
-const hasContentType = computed(() => {
-  const cTypeIds = props.r.contentTypeIds;
-  return isNotEmpty(cTypeIds);
-});
+  const contentTypesStr = computed(() => {
+    const cTypeIds = props.r.contentTypeIds;
+    const cTypesArray = lookupStore.getLabels('contentTypes', cTypeIds, locale.value);
+    return formatTagsStr(cTypesArray);
+  });
 
-const contentTypesStr = computed(() => {
-  const cTypeIds = props.r.contentTypeIds;
-  const cTypesArray = lookupStore.getLabels('contentTypes', cTypeIds, locale.value);
-  return formatTagsStr(cTypesArray);
-});
+  const hasIssues = computed(() => {
+    const issuesIds = props.r.issueIds;
+    return isNotEmpty(issuesIds);
+  });
 
-const hasIssues = computed(() => {
-  const issuesIds = props.r.issueIds;
-  return isNotEmpty(issuesIds);
-});
-
-const issuesStr = computed(() => {
-  const issuesIds = props.r.issueIds;
-  const issuesArray = lookupStore.getLabels('issues', issuesIds, locale.value);
-  return formatTagsStr(issuesArray);
-});
+  const issuesStr = computed(() => {
+    const issuesIds = props.r.issueIds;
+    const issuesArray = lookupStore.getLabels('issues', issuesIds, locale.value);
+    return formatTagsStr(issuesArray);
+  });
 </script>
 
 <template>
