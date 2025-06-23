@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Resource } from '~/stores/resources';
-import Accreditation from '~/components/resource/accreditation.vue';
+import Accreditation from '~/components/resource/Accreditation.vue';
 import Tags from '~/components/resource/Tags.vue';
 
 const props = defineProps<{
