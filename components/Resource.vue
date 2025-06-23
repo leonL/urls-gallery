@@ -81,3 +81,53 @@
     <Tags :r="props.r" />
   </li>
 </template>
+
+<style scoped>
+  li.resource {
+    list-style: none;
+    border-bottom: 0.9px #979797 solid;
+    margin-top: 25px;
+    padding-bottom: 10px;
+  }
+
+  .title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.4rem;
+  }
+
+  .title .pdf {
+    font-size: 11px;
+    font-weight: 600;
+    color: #5f5f5f;
+    padding: 2px 5px;
+    border-radius: 11px;
+    background-color: #e2e2e2;
+    position: relative;
+    bottom: 4px;
+  }
+
+  .title a:not(:hover) {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+
+  .notes {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #000000;
+  }
+
+  .translation {
+    margin-top: 25px;
+    font-size: 16px;
+    color: #000000;
+    font-weight: bold;
+  }
+
+  @media screen and (max-width: 767px) {
+    .title {
+      font-size: 20px;
+    }
+  }
+</style>

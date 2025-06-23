@@ -61,3 +61,31 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+  .tags {
+    margin-top: 16px;
+    color: #000000;
+  }
+
+  .tags .icon {
+    width: 17px;
+    height: 17px;
+    margin-right: 5px;
+    position: relative;
+    top: 4px;
+  }
+
+  .tags .selected {
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+
+  .tags .selected .semi-colon {
+    font-weight: normal;
+  }
+
+  .tag-list {
+    display: flex;
+  }
+</style>
