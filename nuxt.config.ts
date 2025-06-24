@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxtjs/mdc'
   ],
+  css: ['~/assets/css/main.css'],
   i18n: {
     defaultLocale: 'en',
     locales: [

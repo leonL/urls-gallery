@@ -12,17 +12,19 @@
 </script>
 
 <template>
-  <header>
-    <nav>
-      <ul>
-        <li><NuxtLink to="/">Home</NuxtLink></li>
-        <li><NuxtLink to="/about">About</NuxtLink></li>
-      </ul>
-      <button v-for="locale in locales" @click="setLocale(locale.code)">
-        {{ locale.name }}
-      </button>
-    </nav>
-  </header>
-  <h1>{{ $t('welcome') }}</h1>
-  <NuxtPage />
+  <UApp>
+    <header>
+      <nav>
+        <ul>
+          <li><NuxtLink to="/">Home</NuxtLink></li>
+          <li><NuxtLink to="/about">About</NuxtLink></li>
+        </ul>
+        <button v-for="locale in locales" @click="setLocale(locale.code)">
+          {{ locale.name }}
+        </button>
+      </nav>
+    </header>
+    <h1>{{ $t('welcome') }}</h1>
+    <NuxtPage />
+  </UApp>
 </template>
