@@ -2,28 +2,39 @@
   import { useResourceStore } from './stores/resources';
   import { useLookupStore } from './stores/lookups';
 
-  const { locales, setLocale } = useI18n();
+  const { locale } = useI18n();
+  const localePath = useLocalePath();
   
   const resourceStore = useResourceStore();
   await callOnce('resources', () => resourceStore.fetch());
 
   const lookupStore = useLookupStore();
   await callOnce('lookups', () => lookupStore.fetch());
+
+  const isLocaleEn = computed(() => locale.value === 'en');
+
 </script>
 
 <template>
   <UApp>
-    <header>
-      <nav>
-        <ul>
-          <li><NuxtLink to="/">Home</NuxtLink></li>
-          <li><NuxtLink to="/about">About</NuxtLink></li>
-        </ul>
-        <button v-for="locale in locales" @click="setLocale(locale.code)">
-          {{ locale.name }}
-        </button>
+    <header class="flex items-center justify-between px-8 py-4">
+      <NuxtLink to="/">
+        <img v-if="isLocaleEn" src="~/assets/NBWC_logo_en.png" class="logo" :alt="$t('altTextlogo')">
+        <img v-else src="~/assets/NBWC_logo_fr.png" class="logo" :alt="$t('altTextlogo')">
+      </NuxtLink>
+      <nav class="flex gap-8">
+        <NuxtLink :to="localePath('index')">{{ $t('home') }}</NuxtLink>
+        <NuxtLink :to="localePath('about')">{{ $t('about') }}</NuxtLink>
+        <NuxtLink :to="$switchLocalePath('fr')">FR</NuxtLink>
+        <NuxtLink :to="$switchLocalePath('en')">EN</NuxtLink>
       </nav>
     </header>
     <NuxtPage />
   </UApp>
 </template>
+
+<style scope>
+  .logo {
+    width: 239px;
+  }
+</style>
