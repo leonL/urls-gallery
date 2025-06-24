@@ -24,7 +24,6 @@
         </button>
       </nav>
     </header>
-    <h1>{{ $t('welcome') }}</h1>
     <NuxtPage />
   </UApp>
 </template>
