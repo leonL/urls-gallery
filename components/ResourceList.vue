@@ -29,3 +29,9 @@
   </div>
   <UPagination v-model:page="currentPage" :items-per-page="resourcesPerPage" :total="resourceStore.validCount" />
 </template>
+
+<style scoped>
+  ul {
+    padding: 0;
+  }
+</style>
