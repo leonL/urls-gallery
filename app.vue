@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { useResourceStore } from './stores/resources';
   import { useLookupStore } from './stores/lookups';
+  import { useTextStore } from './stores/texts';
 
   const { locale } = useI18n();
   const localePath = useLocalePath();
@@ -10,6 +11,9 @@
 
   const lookupStore = useLookupStore();
   await callOnce('lookups', () => lookupStore.fetch());
+
+  const textStore = useTextStore();
+  await callOnce('texts', () => textStore.fetch());
 
   const isLocaleEn = computed(() => locale.value === 'en');
 

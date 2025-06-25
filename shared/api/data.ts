@@ -31,6 +31,17 @@ interface ApiLookupRow {
   }
 }
 
+interface ApiTextRow {
+  id: string,
+  fields: {
+    ['ID']: string,
+    ['HOME:SUBTITLE']: string,
+    ['ABOUT:LIBRARY']: string,
+    ['ABOUT:NBWC']: string,
+    ['ABOUT:OPEN CALL']: string
+  }
+}
+
 interface ApiResponse {
   offset: string,
   records: []
@@ -57,6 +68,13 @@ export async function fetchResourceRows(table: string = 'RESOURCES', view: strin
 }
 
 export async function fetchLookupRows(table: string, view: string = 'API'): Promise<ApiLookupRow[]> {
+  const path = encodeURI(`/${table}`);
+  let response = await fetchRows(path, view);
+
+  return response.records;
+}
+
+export async function fetchTextRows(table: string  = 'TEXT', view: string = 'API'): Promise<ApiTextRow[]> {
   const path = encodeURI(`/${table}`);
   let response = await fetchRows(path, view);
 
