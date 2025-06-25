@@ -22,10 +22,10 @@
     </div>
 
     <div class='gallery'>
-      <!-- // <div class="filters">
-        <IssuesFilters /> 
+      <div class="filters">
+        <!-- <IssuesFilters />  -->
         <Filters />
-      </div> -->
+      </div>
 
       <div class='index'>
         <ResourceList />
@@ -35,6 +35,15 @@
 </template>
 
 <style scoped>
+  .gallery {
+    display: flex;
+  }
+
+  .filters {
+    width: 30%;
+    flex-grow: 1; 
+  }
+
   .titles {
     margin-bottom: 40px;
   }
