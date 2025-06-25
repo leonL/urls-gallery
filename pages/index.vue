@@ -1,4 +1,13 @@
 <script setup lang="ts">
+  import { useTextStore } from '~/stores/texts';
+
+  const textStore = useTextStore();
+
+  const { locale } = useI18n();
+
+  const subtitleMarkdown = computed(() => {
+    return textStore.getByType('subtitle', locale.value);
+  });
 </script>
 
 <template>
@@ -7,7 +16,9 @@
       <h1 class="title">
         {{ $t('homeTitle') }} 
       </h1>
-      <!-- <h3 class="subtitle" v-html="$md.render(subtitle)"></h3> -->
+      <h3 class="subtitle">
+        <MDC :value="subtitleMarkdown" />
+      </h3>
     </div>
 
     <div class='gallery'>
@@ -33,5 +44,10 @@
     font-weight: bold;
     color: var(--primary-color);
     margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 24px;
+    color: #767676;
   }
 </style>
