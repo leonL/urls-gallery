@@ -2,5 +2,6 @@
   --primary-color: #ee2740;
 }
 
-@import "tailwindcss";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 @import "@nuxt/ui";
