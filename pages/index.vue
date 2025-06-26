@@ -13,11 +13,9 @@
 <template>
   <div>
     <div class='titles'>
-      <h1 class="title">
-        {{ $t('homeTitle') }} 
-      </h1>
+      <h1 class="title">{{ $t('homeTitle') }}</h1>
       <h3 class="subtitle">
-        <MDC :value="subtitleMarkdown" />
+        <MDC :value="subtitleMarkdown" unwrap="p" />
       </h3>
     </div>
 
@@ -35,6 +33,19 @@
 </template>
 
 <style scoped>
+  .title {
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0px;
+  }
+
+  .subtitle {
+    font-size: 24px;
+    font-weight: initial;
+    color: #767676;
+  }
+
   .gallery {
     display: flex;
   }
@@ -44,19 +55,8 @@
     flex-grow: 1; 
   }
 
-  .titles {
-    margin-bottom: 40px;
-  }
-
-  .title {
-    font-size: 48px;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-  }
-
-  .subtitle {
-    font-size: 24px;
-    color: #767676;
+  .index {
+    width: 70%;
+    position: relative;
   }
 </style>
