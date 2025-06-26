@@ -42,7 +42,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 35px;
   }
 
   .logo {
