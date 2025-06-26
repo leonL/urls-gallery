@@ -27,7 +27,7 @@
         <img v-else src="~/assets/NBWC_logo_fr.png" class="logo" :alt="$t('altTextlogo')">
       </NuxtLink>
       <nav>
-        <NuxtLink :to="localePath('index')">{{ $t('home') }}</NuxtLink>
+        <NuxtLink id='home' :to="localePath('index')">{{ $t('home') }}</NuxtLink>
         <NuxtLink :to="localePath('about')">{{ $t('about') }}</NuxtLink>
         <NuxtLink class='locale' :to="$switchLocalePath('fr')">FR</NuxtLink>
         <NuxtLink class='locale' :to="$switchLocalePath('en')">EN</NuxtLink>
@@ -56,12 +56,23 @@
 
   nav a {
     color: #000000;
-    margin-right: 25px;
+    margin-right: 20px;
+    text-decoration: none;
   }
 
+  nav a#home {
+    margin-right: 10px;
+  }
+  
+  nav a.router-link-exact-active {
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+  
   nav a.locale {
     font-weight: bold;
     margin-right: 5px;
+    text-decoration: none;
   }
 
   nav a.locale.router-link-exact-active {
@@ -69,6 +80,5 @@
     background-color: var(--primary-color);
     padding: 5px 10px;
     color: #ffffff;
-    text-decoration: none;
   }
 </style>
