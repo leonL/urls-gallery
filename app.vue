@@ -21,16 +21,16 @@
 
 <template>
   <UApp>
-    <header class="flex items-center justify-between px-8 py-4">
+    <header>
       <NuxtLink to="/">
         <img v-if="isLocaleEn" src="~/assets/NBWC_logo_en.png" class="logo" :alt="$t('altTextlogo')">
         <img v-else src="~/assets/NBWC_logo_fr.png" class="logo" :alt="$t('altTextlogo')">
       </NuxtLink>
-      <nav class="flex gap-8">
+      <nav>
         <NuxtLink :to="localePath('index')">{{ $t('home') }}</NuxtLink>
         <NuxtLink :to="localePath('about')">{{ $t('about') }}</NuxtLink>
-        <NuxtLink :to="$switchLocalePath('fr')">FR</NuxtLink>
-        <NuxtLink :to="$switchLocalePath('en')">EN</NuxtLink>
+        <NuxtLink class='locale' :to="$switchLocalePath('fr')">FR</NuxtLink>
+        <NuxtLink class='locale' :to="$switchLocalePath('en')">EN</NuxtLink>
       </nav>
     </header>
     <NuxtPage />
@@ -38,7 +38,37 @@
 </template>
 
 <style scope>
+  header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+
   .logo {
     width: 239px;
+  }
+
+  nav {
+    align-self: center;
+    font-size: 25px;
+  }
+
+  nav a {
+    color: #000000;
+    margin-right: 25px;
+  }
+
+  nav a.locale {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  nav a.locale.router-link-exact-active {
+    border-radius: 27px;
+    background-color: var(--primary-color);
+    padding: 5px 10px;
+    color: #ffffff;
+    text-decoration: none;
   }
 </style>
