@@ -105,6 +105,7 @@
     background-color: #e2e2e2;
     position: relative;
     bottom: 4px;
+    left: 4px;
   }
 
   .title a:not(:hover) {
