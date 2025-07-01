@@ -22,8 +22,12 @@
   <div>
     <MDC :value="aboutLibraryMarkdown" tag="div" class="about library" />
     <div class='double-pane'>
-      <MDC :value="aboutNbwcMarkdown" class="about nbwc" tag="div" />
-      <MDC :value="aboutOpenCallMarkdown" class="about open-call" tag="div" />
+      <div class="about nbwc">
+        <MDC :value="aboutNbwcMarkdown" unwrap="div" />
+      </div>
+      <div class="about open-call">
+        <MDC :value="aboutOpenCallMarkdown" />
+      </div>
     </div>
     <div class="logos">
       <a :href="$t('nbwcURL')" target="_blank">
@@ -39,26 +43,22 @@
 </template>
 
 <style scoped>
-.double-pane {
-  display: flex;
-  align-items: flex-start;
-  margin: 50px 0 5px 0;
-}
+  .double-pane {
+    display: flex;
+    align-items: flex-start;
+    margin: 50px 0 5px 0;
+  }
 
-.about.nbwc {
-  margin-right: 25px;  
-}
+  .about.nbwc {
+    margin-right: 25px;  
+  }
 
-.about.open-call {
-  margin-left: 25px;
-}
+  .logos {
+    margin-bottom: 30px;
+  }
 
-.logos {
-  margin-bottom: 30px;
-}
-
-.logo {
-  width: 65px;
-  margin-right: 15px;
-}
+  .logo {
+    width: 65px;
+    margin-right: 15px;
+  }
 </style>
