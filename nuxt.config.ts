@@ -11,6 +11,9 @@ export default defineNuxtConfig({
     '@nuxtjs/mdc'
   ],
   css: ['~/assets/css/main.css'],
+   ui: {
+    colorMode: false
+  },
   i18n: {
     defaultLocale: 'en',
     locales: [
