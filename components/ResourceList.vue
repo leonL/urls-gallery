@@ -26,8 +26,10 @@
         :r="resource"
       />
     </ul>
+    <div class="pagination-controls">
+      <UPagination v-model:page="currentPage" :items-per-page="resourcesPerPage" :total="resourceStore.validCount" size="xs" />
+    </div>
   </div>
-  <UPagination v-model:page="currentPage" :items-per-page="resourcesPerPage" :total="resourceStore.validCount" />
 </template>
 
 <style scoped>
@@ -38,5 +40,11 @@
   .pagination-state {
     font-weight: bold;
     font-size: 18px;
+  }
+
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
   }
 </style>
