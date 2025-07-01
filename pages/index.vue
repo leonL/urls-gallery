@@ -33,6 +33,10 @@
 </template>
 
 <style scoped>
+  .titles {
+    margin-bottom: 20px;
+  }
+
   .title {
     font-size: 48px;
     font-weight: bold;

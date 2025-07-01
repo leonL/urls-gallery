@@ -14,6 +14,13 @@ export default defineNuxtConfig({
    ui: {
     colorMode: false
   },
+  mdc: {
+    headings: {
+      anchorLinks: {
+        h3: false, h4: false 
+      }
+    },
+  },
   i18n: {
     defaultLocale: 'en',
     locales: [
