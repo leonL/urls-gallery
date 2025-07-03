@@ -40,7 +40,7 @@ export const useLookupStore = defineStore('lookup', () => {
 
   function getLabel(store: string, id: string, locale: 'en' | 'fr' = 'en') {
     let label = undefined;
-    const lookup = lookups.value[store].find((row) => row.id === id);
+    const lookup = lookups.value[store].find(row => row.id === id);
     if (lookup !== undefined) label = lookup[locale];
     return label;
   }
@@ -49,7 +49,11 @@ export const useLookupStore = defineStore('lookup', () => {
     return ids.map(id => getLabel(store, id, locale));
   }
 
-  return { lookups, getLabel, getLabels, fetch }
+  function getAllLabels(store: string, locale: 'en' | 'fr' = 'en') {
+    return lookups.value[store].map(row => row[locale]);
+  }
+
+  return { lookups, getLabel, getLabels, getAllLabels, fetch }
 });
 
 async function fetchFromPath(table: string) {
