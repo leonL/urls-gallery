@@ -5,13 +5,18 @@
   const filterState = useResourcesFilter().filterState;
   const lookupStore = useLookupStore();
 
-  const geoScopeOptions = computed(() => {
-    const labels = lookupStore.getAllLabels('geoScopes', locale.value);
+  const issueOptions = computed(() => {
+    const labels = lookupStore.getAllLabels('issues', locale.value);
     return labels.map(label => ({ value: label.id.toLowerCase(), label: label.name }));
   });
 
   const contentTypeOptions = computed(() => {
     const labels = lookupStore.getAllLabels('contentTypes', locale.value);
+    return labels.map(label => ({ value: label.id.toLowerCase(), label: label.name }));
+  });
+  
+  const geoScopeOptions = computed(() => {
+    const labels = lookupStore.getAllLabels('geoScopes', locale.value);
     return labels.map(label => ({ value: label.id.toLowerCase(), label: label.name }));
   });
 
@@ -20,6 +25,18 @@
 <template>
   <div>
     <h1 class="title">{{ $t('filters') }}</h1>
+    <div class="issues filter">
+      <div class="toggle">
+        <img class="icon" src="~/assets/issues.png">
+        <h2 class='heading'>{{ $t('issues') }}</h2>
+      </div>
+      <div class="options">
+        <label v-for="option in issueOptions" :key="option.value">
+          <input type="checkbox" :value="option.value" v-model="filterState.issueIds" />
+          {{ option.label }}
+        </label>
+      </div>
+    </div>
     <div class="content-type filter">
       <div class="toggle">
         <img class="icon" src="~/assets/content-type.png">
