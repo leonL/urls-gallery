@@ -10,18 +10,35 @@
     return labels.map(label => ({ value: label.id.toLowerCase(), label: label.name }));
   });
 
+  const contentTypeOptions = computed(() => {
+    const labels = lookupStore.getAllLabels('contentTypes', locale.value);
+    return labels.map(label => ({ value: label.id.toLowerCase(), label: label.name }));
+  });
+
 </script>
 
 <template>
   <div>
     <h1 class="title">{{ $t('filters') }}</h1>
-    <div class="geographic-scopes filter">
+    <div class="content-type filter">
+      <div class="toggle">
+        <img class="icon" src="~/assets/content-type.png">
+        <h2 class='heading'>{{ $t('contentTypesFilter') }}</h2>
+      </div>
+      <div class="options">
+        <label v-for="option in contentTypeOptions" :key="option.value">
+          <input type="checkbox" :value="option.value" v-model="filterState.contentTypeIds" />
+          {{ option.label }}
+        </label>
+      </div>
+    </div>
+    <div class="geographic-scope filter">
       <div class="toggle">
         <img class="globe icon" src="~/assets/globe.png">
         <h2 class='heading'>{{ $t('geographicScope') }}</h2>
       </div>
       <div class="options">
-        <label v-for="option in geoScopeOptions" :key="option.value" class="">
+        <label v-for="option in geoScopeOptions" :key="option.value">
           <input type="checkbox" :value="option.value" v-model="filterState.geographicScopeId" />
           {{ option.label }}
         </label>
