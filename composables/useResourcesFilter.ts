@@ -6,8 +6,9 @@ interface ResourceFilter {
 }
 
 interface ResourceFilterState {
-  geographicScopeId: string[],
-  contentTypeIds: string[]
+  issueIds: string[],
+  contentTypeIds: string[],
+  geographicScopeId: string[]
 }
 
 export function useResourcesFilter(): ResourceFilter {
@@ -15,8 +16,9 @@ export function useResourcesFilter(): ResourceFilter {
   const validResources = resourceStore.valid;
 
   const filterState = useState<ResourceFilterState>('resourceFilter', () => ({
-    geographicScopeId: [],
-    contentTypeIds: []
+    issueIds: [],
+    contentTypeIds: [],
+    geographicScopeId: []
   }));
 
   const resources = computed(() => {
