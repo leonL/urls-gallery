@@ -50,7 +50,7 @@ export const useLookupStore = defineStore('lookup', () => {
   }
 
   function getAllLabels(store: string, locale: 'en' | 'fr' = 'en') {
-    return lookups.value[store].map(row => row[locale]);
+    return lookups.value[store].map(row => ({ id: row.id, name: row[locale]}));
   }
 
   return { lookups, getLabel, getLabels, getAllLabels, fetch }
