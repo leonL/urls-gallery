@@ -1,15 +1,15 @@
 <script setup lang="ts">
   import { useLookupStore } from '~/stores/lookups';
 
-  const lookupStore = useLookupStore();
   const { locale } = useI18n();
+  const filterState = useResourcesFilter().filterState;
+  const lookupStore = useLookupStore();
 
   const geoScopeOptions = computed(() => {
     const labels = lookupStore.getAllLabels('geoScopes', locale.value);
-    return labels.map(label => ({ value: label.toLowerCase(), label }));
+    return labels.map(label => ({ value: label.id.toLowerCase(), label: label.name }));
   });
 
-  const checkedGeoScopes = ref([]);
 </script>
 
 <template>
@@ -22,7 +22,7 @@
       </div>
       <div class="options">
         <label v-for="option in geoScopeOptions" :key="option.value" class="">
-          <input type="checkbox" :value="option.value" v-model="checkedGeoScopes" />
+          <input type="checkbox" :value="option.value" v-model="filterState.geographicScopeId" />
           {{ option.label }}
         </label>
       </div>

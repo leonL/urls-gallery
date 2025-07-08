@@ -34,13 +34,7 @@ export interface Resource {
 
 export const useResourceStore = defineStore('resource', () => {
   const resources = ref<Resource[]>([]);
-  
-  const count = computed(() => resources.value.length);
-  
   const valid = computed(() => resources.value.filter((r) => isValid(r)) ); 
-  const validCount = computed(() => valid.value.length);
-  
-  const filtered = computed(() => resources.value.slice(0, 10));
 
   function fetch() {
     return new Promise(async (resolve) => {
@@ -84,7 +78,7 @@ export const useResourceStore = defineStore('resource', () => {
     });
   }
 
-  return { resources, count, valid, validCount, filtered, fetch }
+  return { resources, valid, fetch }
 })
 
 function isValid(r: Resource) {

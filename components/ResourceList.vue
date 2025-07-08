@@ -1,7 +1,5 @@
-<script setup lang="ts">
-  import { useResourceStore } from '~/stores/resources';
-  
-  const resourceStore = useResourceStore();
+<script setup lang="ts">  
+  const filter = useResourcesFilter();
 
   const resourcesPerPage = 10;
   const currentPage = ref(1);
@@ -10,7 +8,8 @@
     const rangeStart = rangeEnd - resourcesPerPage;
     return [rangeStart, rangeEnd];
   });
-  const paginatedResources = computed(() => resourceStore.valid.slice(...currentPageIndexRange.value));
+  const paginatedResources = computed(() => filter.resources.value.slice(...currentPageIndexRange.value));
+  const totalResourcesCount = computed(() => filter.resources.value.length);
   const currentPageResourceCount = computed(() => paginatedResources.value.length);
 </script>
 
@@ -18,7 +17,7 @@
   <div>
     <span class='pagination-state'>
       {{ currentPageIndexRange[0] + 1 }} &#8211; {{ currentPageIndexRange[0] + currentPageResourceCount }}
-      {{ $t('of') }} {{ resourceStore.validCount }} {{ $t('results') }}
+      {{ $t('of') }} {{ totalResourcesCount }} {{ $t('results') }}
     </span>
     <ul>
       <Resource v-for="resource in paginatedResources" 
@@ -27,7 +26,7 @@
       />
     </ul>
     <div class="pagination-controls">
-      <UPagination v-model:page="currentPage" :items-per-page="resourcesPerPage" :total="resourceStore.validCount" size="xs" />
+      <UPagination v-model:page="currentPage" :items-per-page="resourcesPerPage" :total="totalResourcesCount" size="xs" />
     </div>
   </div>
 </template>
