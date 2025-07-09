@@ -5,7 +5,7 @@ interface ResourceFilter {
   filterState: Ref<ResourceFilterState>
 }
 
-interface ResourceFilterState {
+export interface ResourceFilterState {
   issueIds: string[],
   contentTypeIds: string[],
   geographicScopeId: string[]
