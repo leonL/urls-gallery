@@ -23,44 +23,44 @@
 </script>
 
 <template>
-  <div>
-    <h1 class="title">{{ $t('filters') }}</h1>
-    <div class="issues filter">
-      <div class="toggle">
+  <div id="filters">
+    <h1 id="issues" class="title">{{ $t('filters') }}</h1>
+    <details class="filter">
+      <summary>
         <img class="icon" src="~/assets/issues.png">
         <h2 class='heading'>{{ $t('issues') }}</h2>
-      </div>
+      </summary>
       <div class="options">
         <label v-for="option in issueOptions" :key="option.value">
-          <input type="checkbox" :value="option.value" v-model="filterState.issueIds" />
+          <input type="checkbox" :id="option.value" :value="option.value" v-model="filterState.issueIds" />
           {{ option.label }}
         </label>
       </div>
-    </div>
-    <div class="content-type filter">
-      <div class="toggle">
+    </details>
+    <details id="content-type" class="filter">
+      <summary>
         <img class="icon" src="~/assets/content-type.png">
         <h2 class='heading'>{{ $t('contentTypesFilter') }}</h2>
-      </div>
+      </summary>
       <div class="options">
         <label v-for="option in contentTypeOptions" :key="option.value">
-          <input type="checkbox" :value="option.value" v-model="filterState.contentTypeIds" />
+          <input type="checkbox" :id="option.value" :value="option.value" v-model="filterState.contentTypeIds" />
           {{ option.label }}
         </label>
       </div>
-    </div>
-    <div class="geographic-scope filter">
-      <div class="toggle">
+    </details>
+    <details id="geographic-scope" class="filter">
+      <summary>
         <img class="globe icon" src="~/assets/globe.png">
         <h2 class='heading'>{{ $t('geographicScope') }}</h2>
-      </div>
+      </summary>
       <div class="options">
         <label v-for="option in geoScopeOptions" :key="option.value">
-          <input type="checkbox" :value="option.value" v-model="filterState.geographicScopeId" />
+          <input type="checkbox" :id="option.value" :value="option.value" v-model="filterState.geographicScopeId" />
           {{ option.label }}
         </label>
       </div>
-    </div>
+    </details>
   </div>
 </template>
 
@@ -70,6 +70,10 @@
     color: black;
     font-size: 24px;
     margin-bottom: 10px;
+  }
+
+  .filter {
+    margin-bottom: 15px;
   }
 
   .icon {
@@ -85,15 +89,43 @@
   }
 
   .heading {
-    margin-right: 30px;
     font-size: 18px;
     font-weight: bold;
+    display: inline-block;
+    position: relative;
+    bottom: 1px;
   }
 
   label {
-    display: block;
+    display: flex;
+    gap: 5px;
+    align-items: flex-start;
     margin: 10px 0;
     color: black;
-    font-size: 18px;
+    font-size: 16px;
+  }
+
+  input[type='checkbox'] {
+    position: relative;
+    top: 2px;
+  }
+
+  summary {
+    list-style: none;
+    &::after {
+      float: right;
+      border-style: solid;
+      border-width: 0.15em 0.15em 0 0;
+      content: '';
+      height: 0.45em;
+      width: 0.45em;
+      position: relative;
+      top: 0.20em;
+      transform: rotate(135deg);
+    }
+    [open] &::after {
+      top: 0.40em;
+      transform: rotate(-45deg);
+    }
   }
 </style>

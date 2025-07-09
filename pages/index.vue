@@ -20,8 +20,7 @@
     </div>
 
     <div class='gallery'>
-      <div class="filters">
-        <!-- <IssuesFilters />  -->
+      <div class="sidebar">
         <Filters />
       </div>
 
@@ -54,13 +53,14 @@
     display: flex;
   }
 
-  .filters {
-    width: 30%;
-    flex-grow: 1; 
+  .sidebar {
+    width: 25%;
+    flex-grow: 1;
+    padding-right: 40px; 
   }
 
   .index {
-    width: 70%;
+    width: 75%;
     position: relative;
   }
 </style>
