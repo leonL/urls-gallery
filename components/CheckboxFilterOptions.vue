@@ -1,15 +1,16 @@
 <script setup lang="ts">
   import { useLookupStore } from '~/stores/lookups';
-  import type { ResourceFilterState } from '~/composables/useResourcesFilter';
+  import type { Filter } from '~/composables/useFilterState';
+
 
   const props = defineProps<{ 
     lookupId: string,
-    filterId: keyof ResourceFilterState;
+    filterId: keyof Filter;
   }>();
 
   const { locale } = useI18n();
-  const filterState = useResourcesFilter().filterState;
   const lookupStore = useLookupStore();
+  const filterState = useFilterState();
 
   const options = computed(() => {
     const labels = lookupStore.getAllLabels(props.lookupId, locale.value);
