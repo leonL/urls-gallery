@@ -20,7 +20,7 @@ interface LookupStore {
 }
 
 interface LookupCategoryStore {
-  issues: Array<LookupCategory>
+  [key: string]: Array<LookupCategory>
 }
 
 const apiPaths = {
@@ -34,7 +34,7 @@ const apiPaths = {
 
 export const useLookupStore = defineStore('lookup', () => {
   const lookups = ref<LookupStore>({});
-  const lookupCategories = ref<LookupCategoryStore>({ issues: [] });
+  const lookupCategories = ref<LookupCategoryStore>({});
 
   function fetch() {
     return new Promise(async (resolve) => {
@@ -70,7 +70,13 @@ export const useLookupStore = defineStore('lookup', () => {
     return lookups.value[store].map(row => ({ id: row.id, name: row[locale]}));
   }
 
-  return { lookups, lookupCategories, getLabel, getLabels, getAllLabels, fetch }
+  function getAllCategoryLabels(store: string, locale: 'en' | 'fr' = 'en') {
+    return lookupCategories.value[store].map(row => 
+      ({ id: row.categoryId, name: row[locale], lookupIds: row.lookupIds })
+    );
+  }
+
+  return { lookups, lookupCategories, getLabel, getLabels, getAllLabels, getAllCategoryLabels, fetch }
 });
 
 async function fetchLookupFromPath(table: string) {
