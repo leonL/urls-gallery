@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { fetchLookupRows } from '~/shared/api/data';
+import { fetchLookupRows, fetchLookupCategoryRows } from '~/shared/api/data';
 
 interface Lookup {
   id: string,
@@ -8,8 +8,19 @@ interface Lookup {
   fr: string
 }
 
+interface LookupCategory {
+  categoryId: string,
+  en: string,
+  fr: string,
+  lookupIds: Array<string> 
+}
+
 interface LookupStore {
   [key: string]: Array<Lookup>
+}
+
+interface LookupCategoryStore {
+  issues: Array<LookupCategory>
 }
 
 const apiPaths = {
@@ -23,16 +34,22 @@ const apiPaths = {
 
 export const useLookupStore = defineStore('lookup', () => {
   const lookups = ref<LookupStore>({});
+  const lookupCategories = ref<LookupCategoryStore>({ issues: [] });
 
   function fetch() {
     return new Promise(async (resolve) => {
-      const store = lookups.value;
+      const lookupStore = lookups.value;
+      const lookupCategoryStore = lookupCategories.value;
 
-      await Promise.all(
-        Object.entries(apiPaths).map(async ([key, value]) => {
-          store[key] = await fetchFromPath(value);
-        })
-      );
+      const fetchRequests = Object.entries(apiPaths).map(async ([key, value]) => {
+        fetchLookupFromPath(value).then(result => lookupStore[key] = result);
+      });
+      const issueCategoryFetch = fetchLookupCategoryFromPath('ISSUE CATEGORIES').then(result => {
+        lookupCategoryStore.issues = result;
+      });
+      fetchRequests.push(issueCategoryFetch);
+
+      await Promise.all(fetchRequests);
 
       resolve('fetched');
     });
@@ -53,10 +70,10 @@ export const useLookupStore = defineStore('lookup', () => {
     return lookups.value[store].map(row => ({ id: row.id, name: row[locale]}));
   }
 
-  return { lookups, getLabel, getLabels, getAllLabels, fetch }
+  return { lookups, lookupCategories, getLabel, getLabels, getAllLabels, fetch }
 });
 
-async function fetchFromPath(table: string) {
+async function fetchLookupFromPath(table: string) {
   const rows = await fetchLookupRows(table);
 
   return rows.map((r) => ({
@@ -64,4 +81,15 @@ async function fetchFromPath(table: string) {
     en: r.fields['EN'],
     fr: r.fields['FR']
   }));
-}  
+}
+
+async function fetchLookupCategoryFromPath(table: string) {
+  const rows = await fetchLookupCategoryRows(table);
+
+  return rows.map((r) => ({
+    categoryId: r.fields['ID'],
+    en: r.fields['EN'],
+    fr: r.fields['FR'],
+    lookupIds: r.fields['IDS']
+  }));  
+}
