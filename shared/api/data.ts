@@ -31,6 +31,16 @@ interface ApiLookupRow {
   }
 }
 
+interface ApiLookupCategoryRow {
+  id: string,
+  fields: {
+    ['ID']: string,
+    ['EN']: string,
+    ['FR']: string,
+    ['IDS']: Array<string>
+  }
+}
+
 interface ApiTextRow {
   id: string,
   fields: {
@@ -68,6 +78,13 @@ export async function fetchResourceRows(table: string = 'RESOURCES', view: strin
 }
 
 export async function fetchLookupRows(table: string, view: string = 'API'): Promise<ApiLookupRow[]> {
+  const path = encodeURI(`/${table}`);
+  let response = await fetchRows(path, view);
+
+  return response.records;
+}
+
+export async function fetchLookupCategoryRows(table: string, view: string = 'API'): Promise<ApiLookupCategoryRow[]> {
   const path = encodeURI(`/${table}`);
   let response = await fetchRows(path, view);
 
