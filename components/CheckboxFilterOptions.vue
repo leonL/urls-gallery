@@ -35,7 +35,7 @@
     align-items: flex-start;
     margin: 10px 0;
     color: black;
-    font-size: 16px;
+    font-size: 15px;
   }
 
   input[type='checkbox'] {
