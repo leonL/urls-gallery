@@ -2,10 +2,13 @@
   import { useLookupStore } from '~/stores/lookups';
   import type { Filter } from '~/composables/useFilterState';
 
-  const props = defineProps<{ 
+  const props = withDefaults(defineProps<{ 
     lookupId: string,
     filterId: keyof Filter;
-  }>();
+    isRadio?: boolean
+  }>(), {
+    isRadio: false
+  });
 
   const lookupStore = useLookupStore();
   const filterState = useFilterState();
@@ -15,12 +18,16 @@
     return labels.map(label => ({ value: label.id.toLowerCase(), label: label.name }));
   });
 
+  const inputType = computed(() => {
+    return props.isRadio ? 'radio' : 'checkbox';
+  });
+
 </script>
 
 <template>
   <div class="options">
     <label v-for="option in options" :key="option.value">
-      <input type="radio" :id="option.value" :value="option.value" v-model="filterState[props.filterId]" />
+      <input :type="inputType" :id="option.value" :value="option.value" v-model="filterState[props.filterId]" />
       {{ option.label }}
     </label>
   </div>
