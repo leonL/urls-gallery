@@ -42,6 +42,7 @@
 
   .filter summary {
     list-style: none;
+    cursor: pointer;
   }
   
   .filter > summary::after {
