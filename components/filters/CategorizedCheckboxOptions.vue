@@ -8,7 +8,6 @@
 
   const lookupStore = useLookupStore();
   const filterState = useFilterState();
-  const { locale } = useI18n();
 
   const categories = computed(() => {
     const categories = lookupStore.getAllCategoryLabels(props.categoryId);
