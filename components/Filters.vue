@@ -1,8 +1,7 @@
 <script setup lang="ts">
   import SummaryToggle from './filters/SummaryToggle.vue';
   import CategorizedCheckboxOptions from './filters/CategorizedCheckboxOptions.vue';
-  import CheckboxOptions from './filters/CheckboxOptions.vue';
-  import RadioOptions from './filters/RadioOptions.vue';
+  import Options from './filters/Options.vue';
 
   import issuesIcon from "~/assets/issues.png";
   import languageIcon from "~/assets/language.png";
@@ -20,15 +19,15 @@
     </SummaryToggle>
 
     <SummaryToggle :icon="languageIcon" :heading="$t('language')"> 
-      <RadioOptions lookupId="languages" filterId="languageId" />
+      <Options lookupId="languages" filterId="languageId" :isRadio="true" />
     </SummaryToggle>
 
     <SummaryToggle :icon="contentTypeIcon" :heading="$t('contentTypesFilter')">
-      <CheckboxOptions lookupId="contentTypes" filterId="contentTypeIds" />
+      <Options lookupId="contentTypes" filterId="contentTypeIds" />
     </SummaryToggle> 
 
     <SummaryToggle :icon="geoScopeIcon" :heading="$t('geographicScope')">
-      <CheckboxOptions lookupId="geoScopes" filterId="geographicScopeId"/>
+      <Options lookupId="geoScopes" filterId="geographicScopeId"/>
     </SummaryToggle> 
   </div>
 </template>
