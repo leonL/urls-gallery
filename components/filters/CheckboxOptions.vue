@@ -2,7 +2,6 @@
   import { useLookupStore } from '~/stores/lookups';
   import type { Filter } from '~/composables/useFilterState';
 
-
   const props = defineProps<{ 
     lookupId: string,
     filterId: keyof Filter;
