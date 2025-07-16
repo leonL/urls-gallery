@@ -7,12 +7,11 @@
     filterId: keyof Filter;
   }>();
 
-  const { locale } = useI18n();
   const lookupStore = useLookupStore();
   const filterState = useFilterState();
 
   const options = computed(() => {
-    const labels = lookupStore.getAllLabels(props.lookupId, locale.value);
+    const labels = lookupStore.getAllLabels(props.lookupId);
     return labels.map(label => ({ value: label.id.toLowerCase(), label: label.name }));
   });
 
