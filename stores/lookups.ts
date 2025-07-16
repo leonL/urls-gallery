@@ -36,6 +36,8 @@ export const useLookupStore = defineStore('lookup', () => {
   const lookups = ref<LookupStore>({});
   const lookupCategories = ref<LookupCategoryStore>({});
 
+  const { locale } = useI18n();
+
   function fetch() {
     return new Promise(async (resolve) => {
       const lookupStore = lookups.value;
@@ -55,24 +57,24 @@ export const useLookupStore = defineStore('lookup', () => {
     });
   }
 
-  function getLabel(store: string, id: string, locale: 'en' | 'fr' = 'en') {
+  function getLabel(store: string, id: string) {
     let label = undefined;
     const lookup = lookups.value[store].find(row => row.id === id);
-    if (lookup !== undefined) label = lookup[locale];
+    if (lookup !== undefined) label = lookup[locale.value];
     return label;
   }
 
-  function getLabels(store: string, ids: Array<string>, locale: 'en' | 'fr' = 'en') {
-    return ids.map(id => getLabel(store, id, locale));
+  function getLabels(store: string, ids: Array<string>) {
+    return ids.map(id => getLabel(store, id));
   }
 
-  function getAllLabels(store: string, locale: 'en' | 'fr' = 'en') {
-    return lookups.value[store].map(row => ({ id: row.id, name: row[locale]}));
+  function getAllLabels(store: string) {
+    return lookups.value[store].map(row => ({ id: row.id, name: row[locale.value]}));
   }
 
-  function getAllCategoryLabels(store: string, locale: 'en' | 'fr' = 'en') {
+  function getAllCategoryLabels(store: string) {
     return lookupCategories.value[store].map(row => 
-      ({ id: row.categoryId, name: row[locale], lookupIds: row.lookupIds })
+      ({ id: row.categoryId, name: row[locale.value], lookupIds: row.lookupIds })
     );
   }
 
