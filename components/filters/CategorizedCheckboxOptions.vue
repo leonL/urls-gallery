@@ -56,7 +56,7 @@
     content: '+';
   }
   .category[open] > summary::after {
-    content: '-';
+    content: '–';
   }
   
   label {
