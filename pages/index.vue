@@ -56,7 +56,7 @@
   .sidebar {
     width: 25%;
     flex-grow: 1;
-    padding-right: 40px; 
+    padding-right: 30px; 
   }
 
   .index {
