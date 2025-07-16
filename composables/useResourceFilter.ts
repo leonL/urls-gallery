@@ -5,23 +5,35 @@ export function useResourceFilter() {
   const unfilteredResources = resourceStore.valid;
   
   const filterState = useFilterState();
-  const activeFilters = computed(() => {
+
+  const activeArrayFilters = computed(() => {
     return Object.fromEntries(
-      Object.entries(filterState.value).filter(([_, arr]) => Array.isArray(arr) && arr.length > 0)
+      Object.entries(filterState.value).filter(([_, fValue]) => Array.isArray(fValue) && fValue.length > 0)
     );
+  });
+
+  const isLanguageFilterActive = computed(() => {
+    return filterState.value.languageId !== "both";
   });
 
   const filteredResources = computed(() => {
     let filteredResources = unfilteredResources;
-    Object.entries(activeFilters.value).forEach(([filterId, activeTags]) => {
+    
+    Object.entries(activeArrayFilters.value).forEach(([filterId, activeTags]) => {
       const activeFilterTags:string[] = activeTags;
       filteredResources = filteredResources.filter(resource => {
         let resourceTags = resource[filterId as keyof Filter];
         if (!Array.isArray(resourceTags)) resourceTags = [resourceTags];
-
         return activeFilterTags.some(activeTags => resourceTags.includes(activeTags));
       });
-    }); 
+    });
+
+    if (isLanguageFilterActive.value) {
+      filteredResources = filteredResources.filter(resource => {
+        return resource.languageId === filterState.value.languageId;
+      });
+    }
+
     return filteredResources;
   });
 

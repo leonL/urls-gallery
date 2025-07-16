@@ -2,8 +2,10 @@
   import SummaryToggle from './filters/SummaryToggle.vue';
   import CategorizedCheckboxOptions from './filters/CategorizedCheckboxOptions.vue';
   import CheckboxOptions from './filters/CheckboxOptions.vue';
+  import RadioOptions from './filters/RadioOptions.vue';
 
   import issuesIcon from "~/assets/issues.png";
+  import languageIcon from "~/assets/language.png";
   import contentTypeIcon from "~/assets/content-type.png";
   import geoScopeIcon from "~/assets/globe.png";
 </script>
@@ -15,6 +17,10 @@
     
     <SummaryToggle :icon="issuesIcon" :heading="$t('issues')" :isOpen="true"> 
       <CategorizedCheckboxOptions categoryId="issues" filterId="issueIds" />
+    </SummaryToggle>
+
+    <SummaryToggle :icon="languageIcon" :heading="$t('language')"> 
+      <RadioOptions lookupId="languages" filterId="languageId" />
     </SummaryToggle>
 
     <SummaryToggle :icon="contentTypeIcon" :heading="$t('contentTypesFilter')">
