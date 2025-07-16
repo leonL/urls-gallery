@@ -86,7 +86,7 @@
   li.resource {
     list-style: none;
     border-bottom: 0.9px #979797 solid;
-    margin-top: 25px;
+    margin-top: 5px;
     padding-bottom: 10px;
   }
 
