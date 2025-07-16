@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import CheckboxFilterOptions from './CheckboxFilterOptions.vue';
+  import CheckboxFilterOptions from './filters/CheckboxFilterOptions.vue';
   import { useLookupStore } from '~/stores/lookups';
 
   const lookupStore = useLookupStore();
