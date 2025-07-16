@@ -11,12 +11,12 @@
   const { locale } = useI18n();
 
   const categories = computed(() => {
-    const categories = lookupStore.getAllCategoryLabels(props.categoryId, locale.value);
+    const categories = lookupStore.getAllCategoryLabels(props.categoryId);
     return categories.map(c => ({ id: c.id.toLowerCase(), label: c.name, filterIds: c.lookupIds }));
   });
 
   function getLabelForFilterId(id: string) {
-    return lookupStore.getLabel(props.categoryId, id, locale.value);
+    return lookupStore.getLabel(props.categoryId, id);
   }
 </script>
 
