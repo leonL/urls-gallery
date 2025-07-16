@@ -35,6 +35,10 @@ export interface Resource {
 export const useResourceStore = defineStore('resource', () => {
   const resources = ref<Resource[]>([]);
   const valid = computed(() => resources.value.filter((r) => isValid(r)) ); 
+  const earliestPublicationYear = computed(() => {
+    if (valid.value.length === 0) return new Date().getFullYear(); // fallback to current year
+    return Math.min(...valid.value.map(r => r.pubYear));
+  });
 
   function fetch() {
     return new Promise(async (resolve) => {
@@ -78,7 +82,7 @@ export const useResourceStore = defineStore('resource', () => {
     });
   }
 
-  return { resources, valid, fetch }
+  return { resources, valid, earliestPublicationYear, fetch }
 })
 
 function isValid(r: Resource) {

@@ -1,12 +1,14 @@
 <script setup lang="ts">
   import SummaryToggle from './filters/SummaryToggle.vue';
-  import CategorizedCheckboxOptions from './filters/CategorizedCheckboxOptions.vue';
   import Options from './filters/Options.vue';
+  import CategorizedCheckboxOptions from './filters/CategorizedCheckboxOptions.vue';
+  import YearRange from './filters/YearRange.vue';
 
   import issuesIcon from "~/assets/issues.png";
   import languageIcon from "~/assets/language.png";
   import contentTypeIcon from "~/assets/content-type.png";
   import geoScopeIcon from "~/assets/globe.png";
+  import calendarIcon from "~/assets/calendar.png";
 </script>
 
 
@@ -16,6 +18,10 @@
     
     <SummaryToggle :icon="issuesIcon" :heading="$t('issues')" :isOpen="true"> 
       <CategorizedCheckboxOptions categoryId="issues" filterId="issueIds" />
+    </SummaryToggle>
+
+    <SummaryToggle :icon="calendarIcon" :heading="$t('publicationYear')">
+      <YearRange />
     </SummaryToggle>
 
     <SummaryToggle :icon="languageIcon" :heading="$t('language')"> 
