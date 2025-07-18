@@ -6,6 +6,49 @@
   const currentYear = computed(() => {
     return new Date().getFullYear();
   });
+
+  const floor = computed(() => {
+    return Math.max(
+      filterState.value.yearPublishedRange.start + 1,
+      resourceStore.earliestPublicationYear + 1
+    );
+  })
+
+  let isStartYearValid = ref(true);
+
+  const startYear = computed({
+    get: () => filterState.value.yearPublishedRange.start,
+    set: (value: number | null) => {
+      if (value === null || value === undefined) {
+        isStartYearValid.value = false;
+        return;
+      }
+      if (value >= resourceStore.earliestPublicationYear && value <= (currentYear.value - 1)) {
+        isStartYearValid.value = true;
+        filterState.value.yearPublishedRange.start = value;
+      } else {
+        isStartYearValid.value = false;
+      }
+    }
+  });
+
+  let isEndYearValid = ref(true);
+
+  const endYear = computed({
+    get: () => filterState.value.yearPublishedRange.end,
+    set: (value: number | null) => {
+      if (value === null || value === undefined) {
+        isEndYearValid.value = false;
+        return;
+      };
+      if (value >= floor.value && value <= currentYear.value) {
+        isEndYearValid.value = true;
+        filterState.value.yearPublishedRange.end = value;
+      } else {
+        isEndYearValid.value = false;
+      }
+    }
+  });
 </script>
 
 <template>
@@ -13,18 +56,20 @@
     <input 
       id="startYear"
       type="number" 
-      v-model.number="filterState.yearPublishedRange.start"
+      v-model.number="startYear"
       :min="resourceStore.earliestPublicationYear" 
       :max="currentYear - 1"
+      :class="{'invalid': !isStartYearValid}"
       placeholder="start"
     />
     <div id='emStop'> – </div>
     <input 
       id="endYear"
       type="number" 
-      v-model.number="filterState.yearPublishedRange.end"
+      v-model.number="endYear"
       :min="filterState.yearPublishedRange.start + 1" 
       :max="currentYear"
+      :class="{'invalid': !isEndYearValid}"
       placeholder="end"
     />
   </div>
@@ -42,4 +87,10 @@
     padding: 2px;
     text-align: right;
   }
+
+  #range input.invalid {
+    border-color: red;
+    background-color: pink;
+  }
+
 </style>
