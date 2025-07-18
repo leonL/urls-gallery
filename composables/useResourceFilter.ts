@@ -1,46 +1,35 @@
 export function useResourceFilter() {
   const resourceStore = useResourceStore();
   const unfilteredResources = resourceStore.valid;
-  
   const filterState = useFilterState();
+  const filters = useFilters();
 
   const isLanguageFilterActive = computed(() => {
     return filterState.value.languageId !== "both";
   });
 
-  const arrayFilterKeys = ['issueIds', 'geographicScopeId', 'contentTypeIds'] as const;
-  type ArrayFilterKey = typeof arrayFilterKeys[number];
+  function isTagFilterActive(filterKey: keyof Filter) {
+    const tags = filterState.value[filterKey];
+    return Array.isArray(tags) && tags.length > 0; 
+  } 
 
   const filteredResources = computed(() => {
-    let filteredResources = unfilteredResources;
-    
-    arrayFilterKeys.forEach((filterKey: ArrayFilterKey) => {
-      const activeFilterTags:string[] = filterState.value[filterKey];
-      if (activeFilterTags.length > 0) {
-        filteredResources = filteredResources.filter(resource => {
-          let resourceTags = resource[filterKey];
-          if (!Array.isArray(resourceTags)) resourceTags = [resourceTags];
-          return activeFilterTags.some(activeTags => resourceTags.includes(activeTags));
-        });
-      }
-    });
+    let filtered = filters.inPubYearRange(unfilteredResources);
 
+    if (isTagFilterActive('issueIds')) {
+      filtered = filters.hasTags(filtered, 'issueIds');
+    }
+    if (isTagFilterActive('contentTypeIds')) {
+      filtered = filters.hasTags(filtered, 'contentTypeIds');
+    } 
+    if (isTagFilterActive('geographicScopeId')) {
+      filtered = filters.hasTags(filtered, 'geographicScopeId');
+    }
     if (isLanguageFilterActive.value) {
-      filteredResources = filteredResources.filter(resource => {
-        return resource.languageId === filterState.value.languageId;
-      });
+      filtered = filters.inLanguage(filtered);
     }
 
-    filteredResources = filteredResources.filter(r => {
-      const filterYearRange = filterState.value.yearPublishedRange;
-      let isPubYearInRange = true;
-      if (r.pubYear <  filterYearRange.start || r.pubYear > filterYearRange.end) {
-        isPubYearInRange = false;
-      }
-      return isPubYearInRange; 
-    });
-
-    return filteredResources;
+    return filtered;
   });
 
   return filteredResources;
