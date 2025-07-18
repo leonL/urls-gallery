@@ -21,7 +21,7 @@
 
   const organizations = computed(() => {
     const orgIds = props.r.organizationIds;
-    const orgsArray = lookupStore.getLabels('organizations', orgIds, locale.value);
+    const orgsArray = lookupStore.getLabels('organizations', orgIds);
     return orgsArray.join(", ");
   });
 
@@ -31,7 +31,7 @@
 
   const publication = computed(() => {
     const pubId = props.r.publicationId;
-    return lookupStore.getLabel('publications', pubId, locale.value);
+    return lookupStore.getLabel('publications', pubId);
   });
 
   const publicationDate = computed(() => {
@@ -39,7 +39,7 @@
     let pubDateStr = String(pubYear);
 
     if (props.r.pubMonth !== undefined) {
-      let pubDateObj = new Date(pubYear, props.r.pubMonth);
+      let pubDateObj = new Date(pubYear, props.r.pubMonth - 1);
       let dateFormat: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long' };
       let timeFormatLocale = locale.value === 'en' ? 'en-US' : 'fr';
 
