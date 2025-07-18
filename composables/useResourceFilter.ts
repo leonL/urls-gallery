@@ -31,6 +31,15 @@ export function useResourceFilter() {
       });
     }
 
+    filteredResources = filteredResources.filter(r => {
+      const filterYearRange = filterState.value.yearPublishedRange;
+      let isPubYearInRange = true;
+      if (r.pubYear <  filterYearRange.start || r.pubYear > filterYearRange.end) {
+        isPubYearInRange = false;
+      }
+      return isPubYearInRange; 
+    });
+
     return filteredResources;
   });
 
