@@ -17,7 +17,7 @@
     <summary>
       <img class="icon" :src="props.icon">
       <h2 class='heading'>{{ heading }}</h2>
-      <button v-if="props.isActive" @click="$emit('resetFilter')">clear</button>
+      <Icon v-if="props.isActive" id='clear' @click="$emit('resetFilter')" name="mdi:filter-remove" style="color: red" />
     </summary>
     <slot></slot>
   </details>
@@ -26,6 +26,10 @@
 <style scoped>
   .filter {
     margin-bottom: 15px;
+  }
+
+  summary {
+    position: relative;
   }
 
   .icon {
@@ -62,6 +66,12 @@
   .filter[open] >summary:after {
     top: 0.40em;
     transform: rotate(-45deg);
+  }
+
+  #clear {
+    position: relative;
+    left: 5px;
+    top: 2px;
   }
 
 </style>
