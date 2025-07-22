@@ -2,14 +2,15 @@ export function useResourceFilter() {
   const resourceStore = useResourceStore();
   const unfilteredResources = resourceStore.valid;
   const filterState = useFilterState();
+  const filter = filterState.filter;
   const filters = useFilters();
 
   const isLanguageFilterActive = computed(() => {
-    return filterState.value.languageId !== "both";
+    return filter.value.languageId !== "both";
   });
 
   function isTagFilterActive(filterKey: keyof Filter) {
-    const tags = filterState.value[filterKey];
+    const tags = filter.value[filterKey];
     return Array.isArray(tags) && tags.length > 0; 
   } 
 
