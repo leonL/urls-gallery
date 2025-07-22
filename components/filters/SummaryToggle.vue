@@ -3,8 +3,10 @@
   const props = withDefaults(defineProps<{
     icon: string,
     heading: string,
+    isActive?: boolean,
     isOpen?: boolean
   }>(), {
+    isActive: false,
     isOpen: false
   });
 
@@ -15,6 +17,7 @@
     <summary>
       <img class="icon" :src="props.icon">
       <h2 class='heading'>{{ heading }}</h2>
+      <button v-if="props.isActive" @click="$emit('resetFilter')">clear</button>
     </summary>
     <slot></slot>
   </details>

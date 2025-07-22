@@ -9,6 +9,8 @@
   import contentTypeIcon from "~/assets/content-type.png";
   import geoScopeIcon from "~/assets/globe.png";
   import calendarIcon from "~/assets/calendar.png";
+
+  const fState = useFilterState();
 </script>
 
 
@@ -16,7 +18,8 @@
   <div id="filters">
     <h1 id="title">{{ $t('filters') }}</h1>
     
-    <SummaryToggle :icon="issuesIcon" :heading="$t('issues')" :isOpen="true"> 
+    <SummaryToggle :icon="issuesIcon" :heading="$t('issues')" 
+      :isActive="fState.hasIssues.value" :isOpen="true" @resetFilter="fState.resetByType('issueIds')">
       <CategorizedCheckboxOptions categoryId="issues" filterId="issueIds" />
     </SummaryToggle>
 
@@ -24,7 +27,8 @@
       <YearRange />
     </SummaryToggle>
 
-    <SummaryToggle :icon="languageIcon" :heading="$t('language')"> 
+    <SummaryToggle :icon="languageIcon" :heading="$t('language')" 
+      :isActive="fState.isLanguageSpecific.value" @resetFilter="fState.resetByType('languageId')"> 
       <Options lookupId="languages" filterId="languageId" :isRadio="true" />
     </SummaryToggle>
 
