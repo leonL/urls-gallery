@@ -23,7 +23,8 @@
       <CategorizedCheckboxOptions categoryId="issues" filterId="issueIds" />
     </SummaryToggle>
 
-    <SummaryToggle :icon="calendarIcon" :heading="$t('publicationYear')">
+    <SummaryToggle :icon="calendarIcon" :heading="$t('publicationYear')"
+      :isActive="fState.hasCustomYearRange.value" @resetFilter="fState.resetByType('yearPublishedRange')">
       <YearRange />
     </SummaryToggle>
 

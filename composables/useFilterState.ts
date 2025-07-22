@@ -9,15 +9,17 @@ export interface Filter {
   }
 }
 
-function getCurrentYear(): number {
-  return new Date().getFullYear();
-}
-
 export function useFilterState() {
   const resourceStore = useResourceStore();
 
+  const currentYear = new Date().getFullYear();
+
   const hasIssues = computed(() => filter.value.issueIds.length > 0);
   const isLanguageSpecific = computed(() => filter.value.languageId !== "both");
+  const hasCustomYearRange = computed(() => {
+    return filter.value.yearPublishedRange.start !== resourceStore.earliestPublicationYear ||
+           filter.value.yearPublishedRange.end !== currentYear;
+  });
 
   const resetByType = (type: keyof Filter) => {
     switch (type) {
@@ -36,7 +38,7 @@ export function useFilterState() {
       case 'yearPublishedRange':
         filter.value.yearPublishedRange = {
           start: resourceStore.earliestPublicationYear,
-          end: getCurrentYear()
+          end: currentYear
         };
         break;
     }
@@ -49,9 +51,9 @@ export function useFilterState() {
     languageId: "both",
     yearPublishedRange: {
       start: resourceStore.earliestPublicationYear,
-      end: getCurrentYear() 
+      end: currentYear 
     } 
   }));
 
-  return { filter, hasIssues, isLanguageSpecific, resetByType }
+  return { filter, hasIssues, isLanguageSpecific, hasCustomYearRange, resetByType }
 }
