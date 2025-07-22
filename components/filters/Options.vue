@@ -12,6 +12,7 @@
 
   const lookupStore = useLookupStore();
   const filterState = useFilterState();
+  const filter = filterState.filter;
 
   const options = computed(() => {
     const labels = lookupStore.getAllLabels(props.lookupId);
@@ -27,7 +28,7 @@
 <template>
   <div class="options">
     <label v-for="option in options" :key="option.value">
-      <input :type="inputType" :id="option.value" :value="option.value" v-model="filterState[props.filterId]" />
+      <input :type="inputType" :id="option.value" :value="option.value" v-model="filter[props.filterId]" />
       {{ option.label }}
     </label>
   </div>

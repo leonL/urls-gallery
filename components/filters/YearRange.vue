@@ -1,5 +1,6 @@
 <script setup lang="ts">
   const filterState = useFilterState();
+  const filter = filterState.filter;
 
   const resourceStore = useResourceStore();
 
@@ -9,7 +10,7 @@
 
   const floor = computed(() => {
     return Math.max(
-      filterState.value.yearPublishedRange.start + 1,
+      filter.value.yearPublishedRange.start + 1,
       resourceStore.earliestPublicationYear + 1
     );
   })
@@ -17,7 +18,7 @@
   let isStartYearValid = ref(true);
 
   const startYear = computed({
-    get: () => filterState.value.yearPublishedRange.start,
+    get: () => filter.value.yearPublishedRange.start,
     set: (value: number | null) => {
       if (value === null || value === undefined) {
         isStartYearValid.value = false;
@@ -25,7 +26,7 @@
       }
       if (value >= resourceStore.earliestPublicationYear && value <= (currentYear.value - 1)) {
         isStartYearValid.value = true;
-        filterState.value.yearPublishedRange.start = value;
+        filter.value.yearPublishedRange.start = value;
       } else {
         isStartYearValid.value = false;
       }
@@ -35,7 +36,7 @@
   let isEndYearValid = ref(true);
 
   const endYear = computed({
-    get: () => filterState.value.yearPublishedRange.end,
+    get: () => filter.value.yearPublishedRange.end,
     set: (value: number | null) => {
       if (value === null || value === undefined) {
         isEndYearValid.value = false;
@@ -43,7 +44,7 @@
       };
       if (value >= floor.value && value <= currentYear.value) {
         isEndYearValid.value = true;
-        filterState.value.yearPublishedRange.end = value;
+        filter.value.yearPublishedRange.end = value;
       } else {
         isEndYearValid.value = false;
       }
@@ -67,7 +68,7 @@
       id="endYear"
       type="number" 
       v-model.number="endYear"
-      :min="filterState.yearPublishedRange.start + 1" 
+      :min="filter.yearPublishedRange.start + 1" 
       :max="currentYear"
       :class="{'invalid': !isEndYearValid}"
       placeholder="end"

@@ -15,8 +15,10 @@ function getCurrentYear(): number {
 
 export function useFilterState() {
   const resourceStore = useResourceStore();
+
+  const hasIssues = computed(() => filter.value.issueIds.length > 0);
   
-  return useState<Filter>('resourceFilter', () => ({
+  const filter = useState<Filter>('resourceFilter', () => ({
     issueIds: [],
     contentTypeIds: [],
     geographicScopeId: [],
@@ -26,4 +28,6 @@ export function useFilterState() {
       end: getCurrentYear() 
     } 
   }));
+
+  return { filter, hasIssues }
 }

@@ -8,6 +8,7 @@
 
   const lookupStore = useLookupStore();
   const filterState = useFilterState();
+  const filter = filterState.filter;
 
   const categories = computed(() => {
     const categories = lookupStore.getAllCategoryLabels(props.categoryId);
@@ -26,7 +27,7 @@
     </summary>
     <div class="options">
       <label v-for="id in category.filterIds" :key="id">
-        <input type="checkbox" :id="id" :value="id" v-model="filterState[props.filterId]" />
+        <input type="checkbox" :id="id" :value="id" v-model="filter[props.filterId]" />
         {{ getLabelForFilterId(id) }}
       </label>
     </div>
