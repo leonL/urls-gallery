@@ -21,6 +21,7 @@ export function useFilterState() {
     filter.value.yearPublishedRange.end !== currentYear;
   });
   const hasContentTypes = computed(() => filter.value.contentTypeIds.length > 0);
+  const hasGeographicScopes = computed(() => filter.value.geographicScopeId.length > 0);
 
   const resetByType = (type: keyof Filter) => {
     switch (type) {
@@ -56,5 +57,6 @@ export function useFilterState() {
     } 
   }));
 
-  return { filter, hasIssues, isLanguageSpecific, hasCustomYearRange, hasContentTypes, resetByType }
+  return { filter, hasIssues, isLanguageSpecific, hasCustomYearRange, 
+    hasContentTypes, hasGeographicScopes, resetByType }
 }
