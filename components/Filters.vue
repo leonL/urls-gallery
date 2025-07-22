@@ -38,7 +38,8 @@
       <Options lookupId="contentTypes" filterId="contentTypeIds" />
     </SummaryToggle> 
 
-    <SummaryToggle :icon="geoScopeIcon" :heading="$t('geographicScope')">
+    <SummaryToggle :icon="geoScopeIcon" :heading="$t('geographicScope')"
+      :isActive="fState.hasGeographicScopes.value" @resetFilter="fState.resetByType('geographicScopeId')">
       <Options lookupId="geoScopes" filterId="geographicScopeId"/>
     </SummaryToggle> 
   </div>
