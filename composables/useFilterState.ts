@@ -18,8 +18,9 @@ export function useFilterState() {
   const isLanguageSpecific = computed(() => filter.value.languageId !== "both");
   const hasCustomYearRange = computed(() => {
     return filter.value.yearPublishedRange.start !== resourceStore.earliestPublicationYear ||
-           filter.value.yearPublishedRange.end !== currentYear;
+    filter.value.yearPublishedRange.end !== currentYear;
   });
+  const hasContentTypes = computed(() => filter.value.contentTypeIds.length > 0);
 
   const resetByType = (type: keyof Filter) => {
     switch (type) {
@@ -55,5 +56,5 @@ export function useFilterState() {
     } 
   }));
 
-  return { filter, hasIssues, isLanguageSpecific, hasCustomYearRange, resetByType }
+  return { filter, hasIssues, isLanguageSpecific, hasCustomYearRange, hasContentTypes, resetByType }
 }
