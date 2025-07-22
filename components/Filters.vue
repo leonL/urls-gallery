@@ -33,7 +33,8 @@
       <Options lookupId="languages" filterId="languageId" :isRadio="true" />
     </SummaryToggle>
 
-    <SummaryToggle :icon="contentTypeIcon" :heading="$t('contentTypesFilter')">
+    <SummaryToggle :icon="contentTypeIcon" :heading="$t('contentTypesFilter')"
+      :isActive="fState.hasContentTypes.value" @resetFilter="fState.resetByType('contentTypeIds')">
       <Options lookupId="contentTypes" filterId="contentTypeIds" />
     </SummaryToggle> 
 
