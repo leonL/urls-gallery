@@ -61,7 +61,7 @@
       :min="resourceStore.earliestPublicationYear" 
       :max="currentYear - 1"
       :class="{'invalid': !isStartYearValid}"
-      placeholder="start"
+      placeholder="start "
     />
     <div id='emStop'> – </div>
     <input 
@@ -71,7 +71,7 @@
       :min="filter.yearPublishedRange.start + 1" 
       :max="currentYear"
       :class="{'invalid': !isEndYearValid}"
-      placeholder="end"
+      placeholder="end " 
     />
   </div>
 </template>
