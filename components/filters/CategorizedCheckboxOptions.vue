@@ -23,7 +23,9 @@
 <template>
   <details v-for="category in categories" :key="category.id" class="category">
     <summary>
-      <span class="label">{{ category.label }}</span>
+      <h3 class="label">{{ category.label }}</h3>
+      <Icon v-if="filterState.hasIssues(category.filterIds)" id='clear-button' 
+        @click.prevent="filterState.removeIssues(category.filterIds)" name="mdi:filter-remove" />
     </summary>
     <div class="options">
       <label v-for="id in category.filterIds" :key="id">
@@ -40,20 +42,21 @@
   }
   
   .category > summary {
-    font-weight: bold;
-    display: flex;
-    align-items: center; 
-    justify-content: space-between;
+    list-style: none;
+    position: relative;
     cursor: pointer;
+    font-weight: bold;
   }
   
   .category .label {
-    margin-right: 20%;
     font-size: 15px;
+    display: inline-block;
   }
   
   .category > summary::after {
     content: '+';
+    position: absolute;
+    right: 0;
   }
   .category[open] > summary::after {
     content: '–';
@@ -72,5 +75,13 @@
     width: 12px;
     position: relative;
     top: 1px;
+  }
+
+  #clear-button {
+    position: relative;
+    left: 5px;
+    top: 1px;
+    font-size: smaller;
+    color: palevioletred;
   }
 </style>
