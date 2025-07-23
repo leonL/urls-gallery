@@ -23,9 +23,10 @@
 <template>
   <details v-for="category in categories" :key="category.id" class="category">
     <summary>
-      <h3 class="label">{{ category.label }}</h3>
-      <Icon v-if="filterState.hasIssues(category.filterIds)" id='clear-button' 
-        @click.prevent="filterState.removeIssues(category.filterIds)" name="mdi:filter-remove" />
+      <h3 class="label">{{ category.label }}
+        <Icon v-if="filterState.hasIssues(category.filterIds)" id='clear-button' 
+          @click.prevent="filterState.removeIssues(category.filterIds)" name="mdi:filter-remove" />
+      </h3>
     </summary>
     <div class="options">
       <label v-for="id in category.filterIds" :key="id">
@@ -79,9 +80,9 @@
 
   #clear-button {
     position: relative;
-    left: 5px;
-    top: 1px;
+    top: 2px;
     font-size: smaller;
     color: palevioletred;
+    z-index: 2;
   }
 </style>
