@@ -27,9 +27,11 @@
   .filter {
     margin-bottom: 15px;
   }
-
-  summary {
+  
+  .filter summary {
+    list-style: none;
     position: relative;
+    cursor: pointer;
   }
 
   .icon {
@@ -45,11 +47,6 @@
     display: inline-block;
     position: relative;
     bottom: 1px;
-  }
-
-  .filter summary {
-    list-style: none;
-    cursor: pointer;
   }
   
   .filter > summary::after {
@@ -73,5 +70,4 @@
     left: 5px;
     top: 2px;
   }
-
 </style>
