@@ -19,7 +19,7 @@
     <h1 id="title">{{ $t('filters') }}</h1>
     
     <SummaryToggle :icon="issuesIcon" :heading="$t('issues')" 
-      :isActive="fState.hasIssues.value" :isOpen="true" @resetFilter="fState.resetByType('issueIds')">
+      :isActive="fState.hasAnyIssues.value" :isOpen="true" @resetFilter="fState.resetByType('issueIds')">
       <CategorizedCheckboxOptions categoryId="issues" filterId="issueIds" />
     </SummaryToggle>
 
@@ -34,12 +34,12 @@
     </SummaryToggle>
 
     <SummaryToggle :icon="contentTypeIcon" :heading="$t('contentTypesFilter')"
-      :isActive="fState.hasContentTypes.value" @resetFilter="fState.resetByType('contentTypeIds')">
+      :isActive="fState.hasAnyContentTypes.value" @resetFilter="fState.resetByType('contentTypeIds')">
       <Options lookupId="contentTypes" filterId="contentTypeIds" />
     </SummaryToggle> 
 
     <SummaryToggle :icon="geoScopeIcon" :heading="$t('geographicScope')"
-      :isActive="fState.hasGeographicScopes.value" @resetFilter="fState.resetByType('geographicScopeId')">
+      :isActive="fState.hasAnyGeographicScopes.value" @resetFilter="fState.resetByType('geographicScopeId')">
       <Options lookupId="geoScopes" filterId="geographicScopeId"/>
     </SummaryToggle> 
   </div>
