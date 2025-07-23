@@ -14,14 +14,22 @@ export function useFilterState() {
 
   const currentYear = new Date().getFullYear();
 
-  const hasIssues = computed(() => filter.value.issueIds.length > 0);
+  const hasAnyIssues = computed(() => filter.value.issueIds.length > 0);
   const isLanguageSpecific = computed(() => filter.value.languageId !== "both");
   const hasCustomYearRange = computed(() => {
     return filter.value.yearPublishedRange.start !== resourceStore.earliestPublicationYear ||
     filter.value.yearPublishedRange.end !== currentYear;
   });
-  const hasContentTypes = computed(() => filter.value.contentTypeIds.length > 0);
-  const hasGeographicScopes = computed(() => filter.value.geographicScopeId.length > 0);
+  const hasAnyContentTypes = computed(() => filter.value.contentTypeIds.length > 0);
+  const hasAnyGeographicScopes = computed(() => filter.value.geographicScopeId.length > 0);
+
+  const hasIssues = (issueIds: string[]): boolean => {
+    return issueIds.some(id => filter.value.issueIds.includes(id));
+  };
+
+  const removeIssues = (issueIds: string[]) => {
+    filter.value.issueIds = filter.value.issueIds.filter(id => !issueIds.includes(id));
+  };
 
   const resetByType = (type: keyof Filter) => {
     switch (type) {
@@ -45,7 +53,7 @@ export function useFilterState() {
         break;
     }
   };
-  
+
   const filter = useState<Filter>('resourceFilter', () => ({
     issueIds: [],
     contentTypeIds: [],
@@ -57,6 +65,6 @@ export function useFilterState() {
     } 
   }));
 
-  return { filter, hasIssues, isLanguageSpecific, hasCustomYearRange, 
-    hasContentTypes, hasGeographicScopes, resetByType }
+  return { filter, hasAnyIssues, isLanguageSpecific, hasCustomYearRange, 
+    hasAnyContentTypes, hasAnyGeographicScopes, resetByType, hasIssues, removeIssues }
 }
