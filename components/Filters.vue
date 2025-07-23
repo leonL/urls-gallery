@@ -17,6 +17,8 @@
 <template>
   <div id="filters">
     <h1 id="title">{{ $t('filters') }}</h1>
+    <Icon v-if="fState.isActive.value" id='clear-button' @click.prevent="fState.reset" name="mdi:filter-remove" />
+
     
     <SummaryToggle :icon="issuesIcon" :heading="$t('issues')" 
       :isActive="fState.hasAnyIssues.value" :isOpen="true" @resetFilter="fState.resetByType('issueIds')">
@@ -51,5 +53,15 @@
     color: black;
     font-size: 24px;
     margin-bottom: 10px;
+    display: inline-block;
+  }
+
+  #clear-button {
+    color: darkred;
+    font-size: larger;
+    position: relative;
+    left: 5px;
+    top: 3px;
+    z-index: 2;
   }
 </style>
