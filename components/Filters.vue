@@ -17,7 +17,7 @@
 <template>
   <div id="filters">
     <h1 id="title">{{ $t('filters') }}</h1>
-    <Icon v-if="fState.isActive.value" id='clear-button' @click.prevent="fState.reset" name="mdi:filter-remove" />
+    <Icon v-if="fState.isActive.value" id='clear-button' @click="fState.reset" name="mdi:filter-remove" />
 
     
     <SummaryToggle :icon="issuesIcon" :heading="$t('issues')" 
@@ -60,6 +60,7 @@
     color: darkred;
     font-size: larger;
     position: relative;
+    cursor: pointer;
     left: 5px;
     top: 3px;
     z-index: 2;
