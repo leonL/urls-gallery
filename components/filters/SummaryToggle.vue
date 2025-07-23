@@ -39,14 +39,15 @@
     margin-right: 5px;
     position: relative;
     top: 2px;
+    height: 13px;
   }
 
   .heading {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     display: inline-block;
     position: relative;
-    bottom: 1px;
+    bottom: 3px;
   }
   
   .filter > summary::after {
