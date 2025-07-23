@@ -17,7 +17,7 @@
     <summary>
       <img class="icon" :src="props.icon">
       <h2 class='heading'>{{ heading }}</h2>
-      <Icon v-if="props.isActive" id='clear' @click="$emit('resetFilter')" name="mdi:filter-remove" style="color: red" />
+      <Icon v-if="props.isActive" id='clear' @click.prevent="$emit('resetFilter')" name="mdi:filter-remove" style="color: red" />
     </summary>
     <slot></slot>
   </details>
