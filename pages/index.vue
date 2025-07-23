@@ -11,7 +11,7 @@
 </script>
 
 <template>
-  <div>
+  <div id="index">
     <div class='titles'>
       <h1 class="title">{{ $t('homeTitle') }}</h1>
       <h3 class="subtitle">
@@ -32,6 +32,10 @@
 </template>
 
 <style scoped>
+  #index {
+    height: 100%;
+  }
+
   .titles {
     margin-bottom: 20px;
   }
@@ -51,16 +55,22 @@
 
   .gallery {
     display: flex;
+    height: 100vh;
+    overflow-y: hidden;
   }
-
+  
   .sidebar {
     width: 25%;
     flex-grow: 1;
-    padding-right: 30px; 
+    padding-right: 30px;
+    overflow-y: auto;
+    scrollbar-width: none;
   }
-
+  
   .index {
     width: 75%;
     position: relative;
+    overflow-y: auto;
+    scrollbar-width: none;
   }
 </style>
