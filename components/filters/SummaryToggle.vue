@@ -17,7 +17,7 @@
     <summary>
       <img class="icon" :src="props.icon">
       <h2 class='heading'>{{ heading }}</h2>
-      <Icon v-if="props.isActive" id='clear' @click.prevent="$emit('resetFilter')" name="mdi:filter-remove" style="color: red" />
+      <Icon v-if="props.isActive" id='clear-button' @click.prevent="$emit('resetFilter')" name="mdi:filter-remove" />
     </summary>
     <slot></slot>
   </details>
@@ -65,9 +65,11 @@
     transform: rotate(-45deg);
   }
 
-  #clear {
+  #clear-button {
     position: relative;
     left: 5px;
     top: 2px;
+    color: red;
+    z-index: 2;
   }
 </style>
