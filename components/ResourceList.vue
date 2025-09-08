@@ -1,5 +1,5 @@
 <script setup lang="ts">  
-  const filter = useResourceFilter();
+  const filteredResources = useResourceFilter();
 
   const resourcesPerPage = 10;
   const currentPage = ref(1);
@@ -8,8 +8,8 @@
     const rangeStart = rangeEnd - resourcesPerPage;
     return [rangeStart, rangeEnd];
   });
-  const paginatedResources = computed(() => filter.value.slice(...currentPageIndexRange.value));
-  const totalResourcesCount = computed(() => filter.value.length);
+  const paginatedResources = computed(() => filteredResources.value.slice(...currentPageIndexRange.value));
+  const totalResourcesCount = computed(() => filteredResources.value.length);
   const currentPageResourceCount = computed(() => paginatedResources.value.length);
 </script>
 
@@ -19,6 +19,7 @@
       {{ currentPageIndexRange[0] + 1 }} &#8211; {{ currentPageIndexRange[0] + currentPageResourceCount }}
       {{ $t('of') }} {{ totalResourcesCount }} {{ $t('results') }}
     </span>
+
     <ul>
       <Resource v-for="resource in paginatedResources" 
         :key="resource.id" 
