@@ -34,7 +34,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     airtableApiKey: 'env',
     public: {
-      apiBase: process.env.NUXT_DATA_API_BASE
+      apiBase: process.env.NUXT_NBWC_COVID_BASE_URL
     }
   }
 })
