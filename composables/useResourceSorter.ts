@@ -1,7 +1,7 @@
 export function useResourceSorter() {
   const filteredResources = useResourceFilter();
 
-  const sortOrder = { direction: 'asc', byField: 'datePublished' };
+  const sortOrder = { direction: 'desc', byField: 'datePublished' };
 
   const sortedResources = computed(() => {
     const resources = filteredResources.value.sort((aResource, bResource) => {
