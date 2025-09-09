@@ -11,7 +11,7 @@
 
 <template>
   <span id='sort-order'>
-    <label>Sort by</label>
+    <label>Sort by </label>
     <select v-model="sortBy">
       <option v-for="opt in options" :key="opt.value" :value="opt.value">
         {{ opt[locale] }}
@@ -29,6 +29,7 @@
   #sort-order select {
     font-weight: bold;
     font-size: 17px;
-    border: 0;
+    border: 1px dashed grey;
+    padding: 1px;
   }
 </style>
