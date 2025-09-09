@@ -1,17 +1,14 @@
 export function useResourceSorter() {
   const filteredResources = useResourceFilter();
 
-  const sortOrderState = useState('sortOrderState', () => 'published-desc');
-
-  const sortOrderValues = computed(() => sortOrderState.value.split('-'));
+  const sortByDateType = useState('sortByDateType', () => 'added');
 
   const sortedResources = computed(() => {
     const resourcesCopy = [...filteredResources.value];
     const sorted = resourcesCopy.sort((aResource, bResource) => {
-      let aDate, bDate,
-        comparisonResult = sortOrderValues.value[1] === 'asc' ? -1 : 1;
+      let aDate, bDate;
       
-      if (sortOrderValues.value[0] === "added") {
+      if (sortByDateType.value === "added") {
         aDate = new Date(aResource.dateAdded),
         bDate = new Date(bResource.dateAdded);
       } else {
@@ -20,9 +17,9 @@ export function useResourceSorter() {
       }
 
       if (aDate < bDate) {
-        return comparisonResult;
+        return 1;
       } else if (aDate > bDate) {
-        return comparisonResult * -1;
+        return -1;
       } else {
         return 0
       }
