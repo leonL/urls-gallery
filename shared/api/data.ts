@@ -85,13 +85,6 @@ export async function fetchLookupRows(table: string, view: string = 'API'): Prom
   return response.records;
 }
 
-export async function fetchLookupCategoryRows(table: string, view: string = 'API'): Promise<ApiLookupCategoryRow[]> {
-  const path = encodeURI(`/${table}`);
-  let response = await fetchRows(path, view);
-
-  return response.records;
-}
-
 export async function fetchTextRows(table: string  = 'TEXT', view: string = 'API'): Promise<ApiTextRow[]> {
   const path = encodeURI(`/${table}`);
   let response = await fetchRows(path, view);
