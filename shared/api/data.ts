@@ -18,7 +18,8 @@ interface ApiResourceRow {
     ['ISSUE IDS']: Array<string>,
     ['PUBLICATION YEAR']: number,
     ['PUBLICATION MONTH']: number,
-    ['PUBLICATION DAY']: number
+    ['PUBLICATION DAY']: number,
+    ['RECORD CREATED DATE']: string
   }
 }
 
