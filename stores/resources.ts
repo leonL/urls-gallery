@@ -29,7 +29,8 @@ export interface Resource {
   issueIds: Array<string>,
   pubYear: number,
   pubMonth: number,
-  pubDay: number
+  pubDay: number,
+  dateAdded: string
 }
 
 export const useResourceStore = defineStore('resource', () => {
@@ -73,7 +74,8 @@ export const useResourceStore = defineStore('resource', () => {
           issueIds: f['ISSUE IDS'],
           pubYear: f['PUBLICATION YEAR'],
           pubMonth: f['PUBLICATION MONTH'],
-          pubDay: f['PUBLICATION DAY']
+          pubDay: f['PUBLICATION DAY'],
+          dateAdded: f['RECORD CREATED DATE']
         }
         return resource;
     });
