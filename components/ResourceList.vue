@@ -1,5 +1,5 @@
 <script setup lang="ts">  
-  const filteredResources = useResourceFilter();
+  const sortedResources = useResourceSorter();
 
   const resourcesPerPage = 10;
   const currentPage = ref(1);
@@ -8,8 +8,8 @@
     const rangeStart = rangeEnd - resourcesPerPage;
     return [rangeStart, rangeEnd];
   });
-  const paginatedResources = computed(() => filteredResources.value.slice(...currentPageIndexRange.value));
-  const totalResourcesCount = computed(() => filteredResources.value.length);
+  const paginatedResources = computed(() => sortedResources.value.slice(...currentPageIndexRange.value));
+  const totalResourcesCount = computed(() => sortedResources.value.length);
   const currentPageResourceCount = computed(() => paginatedResources.value.length);
 </script>
 
