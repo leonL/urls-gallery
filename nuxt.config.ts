@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@pinia/nuxt',
     '@nuxtjs/i18n',
-    '@nuxtjs/mdc'
+    '@nuxtjs/mdc',
+    '@vueuse/nuxt'
   ],
   css: ['~/assets/css/main.css'],
    ui: {

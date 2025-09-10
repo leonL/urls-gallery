@@ -1,30 +1,33 @@
 <script setup lang="ts">
-  import { useTextStore } from '~/stores/texts';
-
   const textStore = useTextStore();
-
   const { locale } = useI18n();
+  const { width } = useWindowSize();
+
+  const isSmallScreen = computed(() => width.value < 800);
 
   const subtitleMarkdown = computed(() => {
     return textStore.getByType('subtitle', locale.value);
   });
+
 </script>
 
 <template>
-  <div id="index">
-    <div class='titles'>
-      <h1 class="title">{{ $t('homeTitle') }}</h1>
+  <div id='page'>
+    <div id='titles'>
+      <h1 id="title">{{ $t('homeTitle') }}</h1>
       <h3 class="subtitle">
         <MDC :value="subtitleMarkdown" unwrap="p" />
       </h3>
     </div>
 
-    <div class='gallery'>
-      <div class="sidebar">
-        <Filters />
-      </div>
+    <div id='gallery'>
+      <ClientOnly>
+        <div id="sidebar" v-if="!isSmallScreen">
+          <Filters />
+        </div>
+      </ClientOnly>
 
-      <div class='index'>
+      <div id='list'>
         <ResourceList />
       </div>
     </div>
@@ -32,15 +35,15 @@
 </template>
 
 <style scoped>
-  #index {
+  #page {
     height: 100%;
   }
 
-  .titles {
+  #titles {
     margin-bottom: 20px;
   }
 
-  .title {
+  #title {
     font-size: 48px;
     font-weight: bold;
     color: var(--primary-color);
@@ -53,13 +56,14 @@
     color: #767676;
   }
 
-  .gallery {
+  #gallery {
+    position: relative;
     display: flex;
     height: 100vh;
     overflow-y: hidden;
   }
   
-  .sidebar {
+  #sidebar {
     width: 25%;
     flex-grow: 1;
     padding-right: 30px;
@@ -67,7 +71,7 @@
     scrollbar-width: none;
   }
   
-  .index {
+  #list {
     width: 75%;
     position: relative;
     overflow-y: auto;
@@ -81,6 +85,19 @@
 
     .subtitle {
       font-size: 13px;
+    }
+
+    #gallery {
+      display: flex;
+      height: 100vh;
+      overflow-y: hidden;
+    }
+
+    #list {
+      width: 100%;
+      overflow-y: hidden;
+      height: 100%;
+      scrollbar-width: initial;
     }
   }
 </style>
