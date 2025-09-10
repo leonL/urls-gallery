@@ -80,10 +80,4 @@
   .publication {
     font-style: italic;
   }
-
-  /*
-  .publication-date {
-    No explicit style in old CSS, but you can add spacing if needed 
-  }
-  */
 </style>
