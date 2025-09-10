@@ -82,7 +82,7 @@
     margin-left: 10px;
     padding: 3px 6px 0 6px;
     border-radius: 10%;
-    background-color: whitesmoke;
+    background-color: white;
     border: 1px solid dimgrey;
   }
 
