@@ -4,23 +4,26 @@
   import { useTextStore } from '~/stores/texts';
 
   const { locale } = useI18n();
+  const isLocaleEn = computed(() => locale.value === 'en');
   const localePath = useLocalePath();
   
   const resourceStore = useResourceStore();
-  await callOnce('resources', () => resourceStore.fetch());
-
   const lookupStore = useLookupStore();
-  await callOnce('lookups', () => lookupStore.fetch());
-
   const textStore = useTextStore();
-  await callOnce('texts', () => textStore.fetch());
 
-  const isLocaleEn = computed(() => locale.value === 'en');
+  let isDataLoaded = ref(false);
 
+  await Promise.all([
+    callOnce('resources', () => resourceStore.fetch()),
+    callOnce('lookups', () => lookupStore.fetch()),
+    callOnce('texts', () => textStore.fetch())
+  ]);
+
+  isDataLoaded.value = true;
 </script>
 
 <template>
-  <UApp>
+  <UApp v-if="isDataLoaded">
     <header>
       <NuxtLink to="/">
         <img v-if="isLocaleEn" src="~/assets/NBWC_logo_en.png" class="logo" :alt="$t('altTextlogo')">
