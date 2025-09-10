@@ -73,4 +73,14 @@
     overflow-y: auto;
     scrollbar-width: none;
   }
+
+  @media screen and (max-width: 799px) {
+    .title {
+      font-size: 25px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+    }
+  }
 </style>
