@@ -9,10 +9,6 @@ export interface Resource {
     en: string;
     fr: string;
   },
-  docUrl: {
-    en: string;
-    fr: string;
-  },
   webUrl: {
     en: string;
     fr: string;
@@ -54,10 +50,6 @@ export const useResourceStore = defineStore('resource', () => {
             en: f['TITLE EN'],
             fr: f['TITLE FR']
           },
-          docUrl: {
-            en: getDocUrlOrBlank(f['DOCUMENT EN']),
-            fr: getDocUrlOrBlank(f['DOCUMENT FR'])
-          },
           webUrl: {
             en: f['LINK EN'],
             fr: f['LINK FR']
@@ -90,22 +82,16 @@ export const useResourceStore = defineStore('resource', () => {
 function isValid(r: Resource) {
   let valid = isNotBlank(r.pubYear) && isNotBlank(r.languageId);
   if (valid && (r.languageId === 'en' || r.languageId === 'both')) {
-    valid = isNotBlank(r.docUrl.en) || isNotBlank(r.webUrl.en);
+    valid = isNotBlank(r.webUrl.en);
   }
   if (valid && (r.languageId === 'fr' || r.languageId === 'both')) {
-    valid = isNotBlank(r.docUrl.fr) || isNotBlank(r.webUrl.fr);
+    valid = isNotBlank(r.webUrl.fr);
   }
   return valid;
 }
 
 function isNotBlank(value: string | number) {
   return value !== undefined && value !== '';
-}
-
-function getDocUrlOrBlank(docData: Array<{url: string}> | undefined) {
-  let url = '';
-  if (docData !== undefined) url = docData[0].url;
-  return url;
 }
 
 function getZeroIndexOrBlank(a: Array<string> | undefined) {

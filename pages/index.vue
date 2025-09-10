@@ -20,9 +20,9 @@
     </div>
 
     <div class='gallery'>
-      <!-- <div class="sidebar">
+      <div class="sidebar">
         <Filters />
-      </div> -->
+      </div>
 
       <div class='index'>
         <ResourceList />

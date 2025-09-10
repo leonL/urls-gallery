@@ -80,9 +80,22 @@ export async function fetchResourceRows(table: string = 'RESOURCES', view: strin
 
 export async function fetchLookupRows(table: string, view: string = 'API'): Promise<ApiLookupRow[]> {
   const path = encodeURI(`/${table}`);
-  let response = await fetchRows(path, view);
+  let allRows: ApiLookupRow[] = [];
+  let allRowsFetched = false;
+  let offsetToken = '';
 
-  return response.records;
+  while (!allRowsFetched) {
+    let response = await fetchRows(path, view, offsetToken);
+    allRows.push(...response.records);
+
+    if (response.offset === undefined) {
+      allRowsFetched = true;
+    } else {
+      offsetToken = response.offset;
+    }
+  }
+
+  return allRows;
 }
 
 export async function fetchTextRows(table: string  = 'TEXT', view: string = 'API'): Promise<ApiTextRow[]> {

@@ -22,17 +22,8 @@
     return props.r.title[rLang.value];
   });
 
-  const hasDocUrl = computed(() => {
-    return isNotBlank(props.r.docUrl[rLang.value]);
-  });
-
-  const hasTranslationDocUrl = computed(() => {
-    return isNotBlank(props.r.docUrl[rTransLang.value]);
-  });
-
   const url = computed(() => {
-    const url = hasDocUrl.value ? props.r.docUrl[rLang.value] : props.r.webUrl[rLang.value];
-    return url;
+    return props.r.webUrl[rLang.value];
   });
 
   const rTransLang = computed(() => {
@@ -44,7 +35,7 @@
     if (hasTranslation.value) {
       const r = props.r;
       const lang = rTransLang.value;
-      url = hasTranslationDocUrl.value ? r.docUrl[lang] : r.webUrl[lang];
+      url = r.webUrl[lang];
     }
     return url;
   });
@@ -62,7 +53,6 @@
   <li class="resource">
     <h1 class="title">
       <a :href="url" target="_blank">{{ title }}</a>
-      <span class="pdf" v-if="hasDocUrl">PDF</span>
     </h1>
 
     <Accreditation :r="props.r" />
