@@ -32,4 +32,18 @@
     border: 1px dashed grey;
     padding: 1px;
   }
+
+  @media screen and (max-width: 799px) {
+    #sort-order {
+      position: relative;
+      bottom: 2px;
+    }
+    #sort-order label {
+      font-size: max(2vw, 10px);
+    }
+    
+    #sort-order select {
+      font-size: max(2dvw, 10px);
+    }
+  }
 </style>

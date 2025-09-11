@@ -107,4 +107,16 @@
   #filter-icon.active {
     background-color: red;
   }
+
+  @media screen and (max-width: 799px) {
+    #pagination-state {
+      font-size: max(2dvw, 12px);
+    }
+
+    #filter-icon {
+      margin-left: max(1dvw, 5px);
+      width: max(3dvw, 12px);
+      height: max(3dvw, 12px);
+    }
+  }
 </style>

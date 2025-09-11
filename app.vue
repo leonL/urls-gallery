@@ -91,11 +91,11 @@
     }
 
     .logo {
-      width: 134px;
+      width: max(30dvw, 135px);
     }
 
     nav {
-      font-size: 3dvw;
+      font-size: max(3dvw, 14px);
     }
 
     nav a {
