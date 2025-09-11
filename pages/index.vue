@@ -79,12 +79,12 @@
   }
 
   @media screen and (max-width: 799px) {
-    .title {
-      font-size: 25px;
+    #title {
+      font-size: max(20px, 6vw);
     }
 
     .subtitle {
-      font-size: 13px;
+      font-size: max(12px, 3vw);
     }
 
     #gallery {
