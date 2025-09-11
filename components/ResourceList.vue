@@ -25,9 +25,7 @@
       </span>
       <ClientOnly>
         <UModal title="Filters" v-if="isSmallScreen">
-          <button id="open-filter">
-            <span id="settings-icon"></span>
-          </button>
+          <span id='filter-icon'></span>
           
           <template #content>
             <div id="filters-modal">
@@ -76,22 +74,17 @@
   #filters-modal {
     margin: 20px;
   }
-
-  button#open-filter {
+  
+  #filter-icon {
     margin-right: auto;
     margin-left: 10px;
-    padding: 3px 6px 0 6px;
-    border-radius: 10%;
-    background-color: white;
-    border: 1px solid dimgrey;
-  }
-
-  #settings-icon {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='red' d='M12 12v7.88c.04.3-.06.62-.29.83a.996.996 0 0 1-1.41 0L8.29 18.7a.99.99 0 0 1-.29-.83V12h-.03L2.21 4.62a1 1 0 0 1 .17-1.4c.19-.14.4-.22.62-.22h14c.22 0 .43.08.62.22a1 1 0 0 1 .17 1.4L12.03 12zm3 5h3v-3h2v3h3v2h-3v3h-2v-3h-3z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M6 13h12v-2H6M3 6v2h18V6M10 18h4v-2h-4z'/%3E%3C/svg%3E");
+    border: 1px solid black;
+    border-radius: 10%;
   }
 </style>
