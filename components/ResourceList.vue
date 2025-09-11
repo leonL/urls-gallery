@@ -14,6 +14,13 @@
   const paginatedResources = computed(() => sortedResources.value.slice(...currentPageIndexRange.value)); 
   const totalResourcesCount = computed(() => sortedResources.value.length);
   const currentPageResourceCount = computed(() => paginatedResources.value.length);
+
+  const isModalOpen = ref(false);
+  const filterState = useState<Filter>('resourceFilter');
+
+  watch(filterState, () => {
+    if (isModalOpen.value) isModalOpen.value = false;
+  }, { deep: true });
 </script>
 
 <template>
@@ -24,7 +31,8 @@
         {{ $t('of') }} {{ totalResourcesCount }} {{ $t('results') }}
       </span>
       <ClientOnly>
-        <UModal v-if="isSmallScreen" title="filters" description="controls for filtering the list of resources">
+        <UModal v-if="isSmallScreen" v-model:open="isModalOpen"
+          title="filters" description="controls for filtering the list of resources">
           <span id='filter-icon'></span>
           
           <template #content>
