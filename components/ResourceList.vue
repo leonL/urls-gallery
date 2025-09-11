@@ -24,12 +24,12 @@
         {{ $t('of') }} {{ totalResourcesCount }} {{ $t('results') }}
       </span>
       <ClientOnly>
-        <UModal title="Filters" v-if="isSmallScreen">
+        <UModal v-if="isSmallScreen">
           <span id='filter-icon'></span>
           
           <template #content>
             <div id="filters-modal">
-              <Filters />
+              <Filters :isIssuesOpen="false" />
             </div>
           </template>
         </UModal>
@@ -72,7 +72,12 @@
   }
 
   #filters-modal {
-    margin: 20px;
+    margin: 5px;
+    border: 3px solid hotpink;
+    border-radius: 1%;
+    padding: 30px;
+    overflow-y: scroll;
+    scrollbar-width: none;
   }
   
   #filter-icon {

@@ -9,6 +9,12 @@
   import geoScopeIcon from "~/assets/globe.png";
   import calendarIcon from "~/assets/calendar.png";
 
+  const props = withDefaults(defineProps<{
+    isIssuesOpen?: boolean
+  }>(), {
+    isIssuesOpen: true
+  });
+
   const fState = useFilterState();
 </script>
 
@@ -18,9 +24,8 @@
     <h1 id="title">{{ $t('filters') }}</h1>
     <Icon v-if="fState.isActive.value" id='clear-button' @click="fState.reset" name="mdi:filter-remove" />
 
-    
     <SummaryToggle :icon="issuesIcon" :heading="$t('issues')" 
-      :isActive="fState.hasAnyIssues.value" :isOpen="true" @resetFilter="fState.resetByType('issueIds')">
+      :isActive="fState.hasAnyIssues.value" :isOpen="isIssuesOpen" @resetFilter="fState.resetByType('issueIds')">
       <Options lookupId="issues" filterId="issueIds" />
     </SummaryToggle>
 
