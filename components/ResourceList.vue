@@ -16,9 +16,12 @@
   const currentPageResourceCount = computed(() => paginatedResources.value.length);
 
   const isModalOpen = ref(false);
-  const filterState = useState<Filter>('resourceFilter');
+  const resourceFilterState = useState('resourceFilter');
 
-  watch(filterState, () => {
+  const filterState = useFilterState();
+  const isFilterActive = filterState.isActive;
+
+  watch(resourceFilterState, () => {
     if (isModalOpen.value) isModalOpen.value = false;
   }, { deep: true });
 </script>
@@ -33,7 +36,7 @@
       <ClientOnly>
         <UModal v-if="isSmallScreen" v-model:open="isModalOpen"
           title="filters" description="controls for filtering the list of resources">
-          <span id='filter-icon'></span>
+          <span id='filter-icon' :class="{ active: isFilterActive }"></span>
           
           <template #content>
             <div id="filters-modal">
@@ -99,5 +102,9 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M6 13h12v-2H6M3 6v2h18V6M10 18h4v-2h-4z'/%3E%3C/svg%3E");
     border: 1px solid black;
     border-radius: 10%;
+  }
+
+  #filter-icon.active {
+    background-color: red;
   }
 </style>
