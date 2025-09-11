@@ -24,7 +24,7 @@
         {{ $t('of') }} {{ totalResourcesCount }} {{ $t('results') }}
       </span>
       <ClientOnly>
-        <UModal v-if="isSmallScreen">
+        <UModal v-if="isSmallScreen" title="filters" description="controls for filtering the list of resources">
           <span id='filter-icon'></span>
           
           <template #content>

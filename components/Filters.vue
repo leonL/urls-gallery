@@ -69,4 +69,8 @@
     top: 3px;
     z-index: 2;
   }
+
+  #filters * {
+    outline: none;
+  }
 </style>
