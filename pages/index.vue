@@ -81,6 +81,11 @@
     .subtitle {
       font-size: max(12px, 3vw);
     }
+
+    #gallery {
+      max-height: none;
+      overflow-y: visible;
+    }
     
     #sidebar {
       width: 0;
