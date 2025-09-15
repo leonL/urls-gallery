@@ -113,7 +113,7 @@
   }
 
   #filter-icon.active {
-    background-color: red;
+    background-color: lightpink;
   }
 
   @media screen and (max-width: 799px) {
