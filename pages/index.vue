@@ -81,18 +81,14 @@
     .subtitle {
       font-size: max(12px, 3vw);
     }
-
-    /* #gallery {
-      display: flex;
-      height: 100vh;
-      overflow-y: hidden;
+    
+    #sidebar {
+      width: 0;
+    }
+    
+    #main {
+      width: 100%;
     }
 
-    #list {
-      width: 100%;
-      overflow-y: hidden;
-      height: 100%;
-      scrollbar-width: initial;
-    } */
   }
 </style>

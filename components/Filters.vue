@@ -80,4 +80,10 @@
   #filters * {
     outline: none;
   }
+
+  @media screen and (max-width: 799px) {
+    #filters {
+      border: none;
+    }
+  }
 </style>
