@@ -20,8 +20,8 @@
 
 
 <template>
+  <h1 id="title">{{ $t('filters') }}</h1>
   <div id="filters">
-    <h1 id="title">{{ $t('filters') }}</h1>
     <Icon v-if="fState.isActive.value" id='clear-button' @click="fState.reset" name="mdi:filter-remove" />
 
     <SummaryToggle :icon="issuesIcon" :heading="$t('issues')" 
@@ -68,6 +68,12 @@
     left: 5px;
     top: 3px;
     z-index: 2;
+  }
+
+  #filters {
+    height: 95vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
   }
 
   #filters * {

@@ -27,7 +27,7 @@
 </script>
 
 <template>
-  <div>
+  <div id="list">
     <div id="header">
       <span id='pagination-state'>
         {{ currentPageIndexRange[0] + 1 }} &#8211; {{ currentPageIndexRange[0] + currentPageResourceCount }}
@@ -60,8 +60,16 @@
 </template>
 
 <style scoped>
+  #list {
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+  }
+
   ul {
     padding: 0;
+    overflow-y: scroll;
+    scrollbar-width: none;
   }
   
   #header {
@@ -70,16 +78,16 @@
     align-items: center;
     margin-bottom: 10px;
   }
-  
-  #pagination-state {
-    font-size: 18px;
-    font-weight: bold;  
-  }
 
   #pagination-controls {
     display: flex;
     justify-content: center;
     margin: 10px 0;
+  }
+  
+  #pagination-state {
+    font-size: 18px;
+    font-weight: bold;  
   }
 
   #filters-modal {

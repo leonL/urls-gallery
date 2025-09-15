@@ -27,7 +27,7 @@
         </div>
       </ClientOnly>
 
-      <div id='list'>
+      <div id='main'>
         <ResourceList />
       </div>
     </div>
@@ -59,7 +59,7 @@
   #gallery {
     position: relative;
     display: flex;
-    height: 100vh;
+    height: 95vh;
     overflow-y: hidden;
   }
   
@@ -67,15 +67,10 @@
     width: 25%;
     flex-grow: 1;
     padding-right: 30px;
-    overflow-y: auto;
-    scrollbar-width: none;
   }
   
-  #list {
+  #main {
     width: 75%;
-    position: relative;
-    overflow-y: auto;
-    scrollbar-width: none;
   }
 
   @media screen and (max-width: 799px) {
@@ -87,7 +82,7 @@
       font-size: max(12px, 3vw);
     }
 
-    #gallery {
+    /* #gallery {
       display: flex;
       height: 100vh;
       overflow-y: hidden;
@@ -98,6 +93,6 @@
       overflow-y: hidden;
       height: 100%;
       scrollbar-width: initial;
-    }
+    } */
   }
 </style>
