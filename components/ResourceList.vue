@@ -123,8 +123,8 @@
 
     #filter-icon {
       margin-left: max(1dvw, 5px);
-      width: max(3dvw, 12px);
-      height: max(3dvw, 12px);
+      width: max(3dvw, 14px);
+      height: max(3dvw, 14px);
     }
   }
 </style>
