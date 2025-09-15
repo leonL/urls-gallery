@@ -59,7 +59,7 @@
   #gallery {
     position: relative;
     display: flex;
-    height: 95vh;
+    max-height: 95vh;
     overflow-y: hidden;
   }
   

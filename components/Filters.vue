@@ -71,8 +71,9 @@
   }
 
   #filters {
-    height: 95vh;
+    max-height: 85vh;
     overflow-y: scroll;
+    border-bottom: 1px dashed dimgrey;
     scrollbar-width: none;
   }
 
