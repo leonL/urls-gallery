@@ -20,7 +20,7 @@
 
 
 <template>
-  <h1 id="title">{{ $t('filters') }}</h1>
+  <h1 id="filter-title">{{ $t('filters') }}</h1>
   <Icon v-if="fState.isActive.value" id='clear-button' @click="fState.reset" name="mdi:filter-remove" />
   <div id="filters">
 
@@ -52,7 +52,7 @@
 </template>
 
 <style scoped>
-  h1#title {
+  h1#filter-title {
     font-weight: bold;
     color: black;
     font-size: 24px;

@@ -86,18 +86,6 @@
     font-size: 1.4rem;
   }
 
-  .title .pdf {
-    font-size: 11px;
-    font-weight: 600;
-    color: #5f5f5f;
-    padding: 2px 5px;
-    border-radius: 11px;
-    background-color: #e2e2e2;
-    position: relative;
-    bottom: 4px;
-    left: 4px;
-  }
-
   .title a:not(:hover) {
     color: var(--primary-color);
     text-decoration: none;
@@ -116,9 +104,18 @@
     font-weight: bold;
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 799px) {
     .title {
-      font-size: 20px;
+      font-size: max(15px, 2.8vw);
+    }
+    
+    .notes {
+      font-size: max(13px, 2.3vw);
+    }
+
+    .translation {
+      font-size: max(11px, 2.1vw);
+      margin-top: 15px;
     }
   }
 </style>

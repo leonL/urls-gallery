@@ -19,7 +19,7 @@
 
   const geographicScope = computed(() => {
     const geoScopeId = props.r.geographicScopeId;
-    return lookupStore.getLabel('geoScopes', geoScopeId, locale.value);
+    return lookupStore.getLabel('geoScopes', geoScopeId);
   });
 
   const hasContentType = computed(() => {
@@ -29,7 +29,7 @@
 
   const contentTypesStr = computed(() => {
     const cTypeIds = props.r.contentTypeIds;
-    const cTypesArray = lookupStore.getLabels('contentTypes', cTypeIds, locale.value);
+    const cTypesArray = lookupStore.getLabels('contentTypes', cTypeIds);
     return formatTagsStr(cTypesArray);
   });
 
@@ -40,7 +40,7 @@
 
   const issuesStr = computed(() => {
     const issuesIds = props.r.issueIds;
-    const issuesArray = lookupStore.getLabels('issues', issuesIds, locale.value);
+    const issuesArray = lookupStore.getLabels('issues', issuesIds);
     return formatTagsStr(issuesArray);
   });
 </script>
@@ -87,5 +87,16 @@
 
   .tag-list {
     display: flex;
+  }
+
+  @media screen and (max-width: 799px) {
+    .tags {
+      margin-top: 1dvh;
+      font-size: max(12px, 2dvw);
+    }
+    .tags .icon {
+      width: 12px;
+      height: 12px;
+    }
   }
 </style>
