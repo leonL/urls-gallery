@@ -126,9 +126,18 @@
     font-weight: bold;
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 799px) {
     .title {
-      font-size: 20px;
+      font-size: max(15px, 2.8vw);
+    }
+    
+    .notes {
+      font-size: max(13px, 2.3vw);
+    }
+
+    .translation {
+      font-size: max(11px, 2.1vw);
+      margin-top: 15px;
     }
   }
 </style>

@@ -81,4 +81,35 @@
     padding: 5px 10px;
     color: #ffffff;
   }
+
+  @media screen and (max-width: 799px) {
+    header {
+      margin-bottom: 10px;
+    }
+
+    .logo {
+      width: max(30dvw, 135px);
+    }
+
+    nav {
+      font-size: max(3dvw, 14px);
+    }
+
+    nav a {
+      margin-right: 2dvw;
+    }
+
+    nav a#home {
+      margin-right: 1.5dvw;
+    }
+
+    nav a.locale {
+      margin-right: 1dvw;
+    }
+
+    nav a.locale.router-link-exact-active {
+      border-radius: 27px;
+      padding: 2px 5px;
+    }
+  }
 </style>

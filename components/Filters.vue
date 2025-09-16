@@ -10,19 +10,24 @@
   import geoScopeIcon from "~/assets/globe.png";
   import calendarIcon from "~/assets/calendar.png";
 
+  const props = withDefaults(defineProps<{
+    isIssuesOpen?: boolean
+  }>(), {
+    isIssuesOpen: true
+  });
+
   const fState = useFilterState();
 </script>
 
 
 <template>
+  <h1 id="filter-title">{{ $t('filters') }}</h1>
+  <Icon v-if="fState.isActive.value" id='clear-button' @click="fState.reset" name="mdi:filter-remove" />
   <div id="filters">
-    <h1 id="title">{{ $t('filters') }}</h1>
-    <Icon v-if="fState.isActive.value" id='clear-button' @click="fState.reset" name="mdi:filter-remove" />
 
-    
     <SummaryToggle :icon="issuesIcon" :heading="$t('issues')" 
-      :isActive="fState.hasAnyIssues.value" :isOpen="true" @resetFilter="fState.resetByType('issueIds')">
-      <CategorizedCheckboxOptions categoryId="issues" filterId="issueIds" />
+      :isActive="fState.hasAnyIssues.value" :isOpen="isIssuesOpen" @resetFilter="fState.resetByType('issueIds')">
+      <Options lookupId="issues" filterId="issueIds" />
     </SummaryToggle>
 
     <SummaryToggle :icon="calendarIcon" :heading="$t('publicationYear')"
@@ -48,7 +53,7 @@
 </template>
 
 <style scoped>
-  h1#title {
+  h1#filter-title {
     font-weight: bold;
     color: black;
     font-size: 24px;
@@ -64,5 +69,22 @@
     left: 5px;
     top: 3px;
     z-index: 2;
+  }
+
+  #filters {
+    max-height: 87vh;
+    overflow-y: scroll;
+    border-bottom: 1px dotted pink;
+    scrollbar-width: none;
+  }
+
+  #filters * {
+    outline: none;
+  }
+
+  @media screen and (max-width: 799px) {
+    #filters {
+      border: none;
+    }
   }
 </style>
