@@ -16,9 +16,6 @@ interface ApiResourceRow {
     ['CONTENT TYPE IDS']: Array<string>,
     ['ORGANIZATION IDS']: Array<string>,
     ['ISSUE IDS']: Array<string>,
-    ['PUBLICATION YEAR']: number,
-    ['PUBLICATION MONTH']: number,
-    ['PUBLICATION DAY']: number,
     ['RECORD CREATED DATE']: string
   }
 }

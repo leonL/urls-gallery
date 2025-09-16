@@ -1,13 +1,11 @@
 <script setup lang="ts">
   import SummaryToggle from './filters/SummaryToggle.vue';
   import Options from './filters/Options.vue';
-  import YearRange from './filters/YearRange.vue';
 
   import issuesIcon from "~/assets/issues.png";
   import languageIcon from "~/assets/language.png";
   import contentTypeIcon from "~/assets/content-type.png";
   import geoScopeIcon from "~/assets/globe.png";
-  import calendarIcon from "~/assets/calendar.png";
 
   const props = withDefaults(defineProps<{
     isIssuesOpen?: boolean
@@ -27,11 +25,6 @@
     <SummaryToggle :icon="issuesIcon" :heading="$t('issues')" 
       :isActive="fState.hasAnyIssues.value" :isOpen="isIssuesOpen" @resetFilter="fState.resetByType('issueIds')">
       <Options lookupId="issues" filterId="issueIds" />
-    </SummaryToggle>
-
-    <SummaryToggle :icon="calendarIcon" :heading="$t('publicationYear')"
-      :isActive="fState.hasCustomYearRange.value" @resetFilter="fState.resetByType('yearPublishedRange')">
-      <YearRange />
     </SummaryToggle>
 
     <SummaryToggle :icon="languageIcon" :heading="$t('language')" 

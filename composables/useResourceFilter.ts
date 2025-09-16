@@ -15,7 +15,7 @@ export function useResourceFilter() {
   } 
 
   const filteredResources = computed(() => {
-    let filtered = filters.inPubYearRange(unfilteredResources);
+    let filtered = unfilteredResources;
 
     if (isTagFilterActive('issueIds')) {
       filtered = filters.hasTags(filtered, 'issueIds');

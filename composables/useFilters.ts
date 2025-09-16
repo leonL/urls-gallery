@@ -20,16 +20,5 @@ export function useFilters() {
     });
   }
 
-  const inPubYearRange = function (resources: Resource[]) {
-    return resources.filter(r => {
-      const filterYearRange = filter.value.yearPublishedRange;
-      let isPubYearInRange = true;
-      if (r.pubYear <  filterYearRange.start || r.pubYear > filterYearRange.end) {
-        isPubYearInRange = false;
-      }
-      return isPubYearInRange; 
-    });
-  }
-
-  return { inLanguage, inPubYearRange, hasTags };
+  return { inLanguage, hasTags };
 }
