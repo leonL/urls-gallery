@@ -59,6 +59,7 @@
     width: 0.45em;
     position: relative;
     top: 0.20em;
+    right: 0.5em;
     transform: rotate(135deg);
   }
   .filter[open] >summary:after {
