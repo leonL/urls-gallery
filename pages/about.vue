@@ -19,7 +19,7 @@
 </script>
 
 <template>
-  <div>
+  <div id="about-page">
     <MDC :value="aboutLibraryMarkdown" tag="div" class="about library" />
     <div class='double-pane'>
       <div class="about nbwc">
@@ -60,5 +60,28 @@
   .logo {
     width: 65px;
     margin-right: 15px;
+  }
+
+  @media screen and (max-width: 699px) {
+    #about-page {
+      margin: 5px;
+    }
+
+    #about-page * {
+      font-size: 16px;
+    }
+
+    .double-pane {
+      display: block;
+    }
+
+    .logos {
+      margin-bottom: 10px;
+    }
+
+    .logo {
+      width: 40px;
+      margin-right: 10px;
+    }
   }
 </style>

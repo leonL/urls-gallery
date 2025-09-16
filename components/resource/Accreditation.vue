@@ -80,4 +80,10 @@
   .publication {
     font-style: italic;
   }
+
+  @media screen and (max-width: 799px) {
+   .accreditation {
+      font-size: max(12px, 2.1vw);
+    }
+  }
 </style>

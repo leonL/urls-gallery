@@ -39,3 +39,11 @@ h4 {
 ul {
   margin: 0;
 }
+
+@media screen and (max-width: 799px) {
+  body {
+    width: 95%;
+    max-width: 960px;
+    margin: 10px auto;
+  }
+}
