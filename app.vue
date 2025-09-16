@@ -24,7 +24,7 @@
           <li v-for="cTypeId in r.contentTypeIds" :key="cTypeId">
             <p>{{ lookupStore.getLabel('contentTypes', cTypeId) }}</p>
           </li>
-          <h5>content types (french)</h5>
+          <h5>content types (francais)</h5>
           <li v-for="cTypeId in r.contentTypeIds" :key="cTypeId">
             <p>{{ lookupStore.getLabel('contentTypes', cTypeId, 'fr') }}</p>
           </li>
