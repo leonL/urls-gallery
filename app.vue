@@ -1,8 +1,4 @@
 <script setup lang="ts">
-  import { useResourceStore } from '~/stores/resources';
-  import { useLookupStore } from '~/stores/lookups';
-  import { useTextStore } from '~/stores/texts';
-
   const { locale } = useI18n();
   const localePath = useLocalePath();
 
