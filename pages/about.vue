@@ -1,6 +1,4 @@
 <script setup lang="ts">
-  import { useTextStore } from '~/stores/texts';
-
   const textStore = useTextStore();
 
   const { locale } = useI18n();
