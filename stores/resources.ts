@@ -23,19 +23,12 @@ export interface Resource {
   contentTypeIds: Array<string>,
   organizationIds: Array<string>,
   issueIds: Array<string>,
-  pubYear: number,
-  pubMonth: number,
-  pubDay: number,
   dateAdded: string
 }
 
 export const useResourceStore = defineStore('resource', () => {
   const resources = ref<Resource[]>([]);
   const valid = computed(() => resources.value.filter((r) => isValid(r)) ); 
-  const earliestPublicationYear = computed(() => {
-    if (valid.value.length === 0) return new Date().getFullYear(); // fallback to current year
-    return Math.min(...valid.value.map(r => r.pubYear));
-  });
 
   function fetch() {
     return new Promise(async (resolve) => {
@@ -64,9 +57,6 @@ export const useResourceStore = defineStore('resource', () => {
           contentTypeIds: f['CONTENT TYPE IDS'],
           organizationIds: f['ORGANIZATION IDS'],
           issueIds: f['ISSUE IDS'],
-          pubYear: f['PUBLICATION YEAR'],
-          pubMonth: f['PUBLICATION MONTH'],
-          pubDay: f['PUBLICATION DAY'],
           dateAdded: f['RECORD CREATED DATE']
         }
         return resource;
@@ -76,11 +66,11 @@ export const useResourceStore = defineStore('resource', () => {
     });
   }
 
-  return { resources, valid, earliestPublicationYear, fetch }
+  return { resources, valid, fetch }
 })
 
 function isValid(r: Resource) {
-  let valid = isNotBlank(r.pubYear) && isNotBlank(r.languageId);
+  let valid = isNotBlank(r.languageId);
   if (valid && (r.languageId === 'en' || r.languageId === 'both')) {
     valid = isNotBlank(r.webUrl.en);
   }

@@ -2,42 +2,27 @@ export interface Filter {
   issueIds: string[],
   contentTypeIds: string[],
   geographicScopeId: string[],
-  languageId: string,
-  yearPublishedRange: {
-    start: number,
-    end: number
-  }
+  languageId: string
 }
 
 export function useFilterState() {
   const resourceStore = useResourceStore();
 
-  const currentYear = new Date().getFullYear();
-
   const initialFilterState = {
     issueIds: [],
     contentTypeIds: [],
     geographicScopeId: [],
-    languageId: "both",
-    yearPublishedRange: {
-      start: resourceStore.earliestPublicationYear,
-      end: currentYear 
-    } 
+    languageId: "both"
   }
 
   const hasAnyIssues = computed(() => filter.value.issueIds.length > 0);
   const isLanguageSpecific = computed(() => filter.value.languageId !== "both");
-  const hasCustomYearRange = computed(() => {
-    return filter.value.yearPublishedRange.start !== resourceStore.earliestPublicationYear ||
-    filter.value.yearPublishedRange.end !== currentYear;
-  });
   const hasAnyContentTypes = computed(() => filter.value.contentTypeIds.length > 0);
   const hasAnyGeographicScopes = computed(() => filter.value.geographicScopeId.length > 0);
 
   const isActive = computed(() => {
     return hasAnyIssues.value || 
-      isLanguageSpecific.value || 
-      hasCustomYearRange.value || 
+      isLanguageSpecific.value ||
       hasAnyContentTypes.value || 
       hasAnyGeographicScopes.value;
   }); 
@@ -64,12 +49,6 @@ export function useFilterState() {
       case 'languageId':
         filter.value.languageId = "both";
         break;
-      case 'yearPublishedRange':
-        filter.value.yearPublishedRange = {
-          start: resourceStore.earliestPublicationYear,
-          end: currentYear
-        };
-        break;
     }
   };
 
@@ -80,6 +59,6 @@ export function useFilterState() {
   const filter = useState<Filter>('resourceFilter', () => (initialFilterState));
 
 
-  return { filter, isActive, hasAnyIssues, isLanguageSpecific, hasCustomYearRange, reset,
+  return { filter, isActive, hasAnyIssues, isLanguageSpecific, reset,
     hasAnyContentTypes, hasAnyGeographicScopes, resetByType, hasIssues, removeIssues }
 }

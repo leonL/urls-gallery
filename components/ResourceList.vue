@@ -2,7 +2,7 @@
   const { width } = useWindowSize();
   const isSmallScreen = computed(() => width.value < 800);
 
-  const sortedResources = useResourceSorter();
+  const filteredResources = useResourceFilter();
 
   const resourcesPerPage = 10;
   const currentPage = ref(1);
@@ -11,8 +11,8 @@
     const rangeStart = rangeEnd - resourcesPerPage;
     return [rangeStart, rangeEnd];
   });
-  const paginatedResources = computed(() => sortedResources.value.slice(...currentPageIndexRange.value)); 
-  const totalResourcesCount = computed(() => sortedResources.value.length);
+  const paginatedResources = computed(() => filteredResources.value.slice(...currentPageIndexRange.value)); 
+  const totalResourcesCount = computed(() => filteredResources.value.length);
   const currentPageResourceCount = computed(() => paginatedResources.value.length);
 
   const isModalOpen = ref(false);
@@ -45,7 +45,6 @@
           </template>
         </UModal>
       </ClientOnly>
-      <SortOrderInput />
     </div>
     <ul>
       <Resource v-for="resource in paginatedResources" 
@@ -110,6 +109,7 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M6 13h12v-2H6M3 6v2h18V6M10 18h4v-2h-4z'/%3E%3C/svg%3E");
     border: 1px solid black;
     border-radius: 10%;
+    cursor: pointer;
   }
 
   #filter-icon.active {
