@@ -13,12 +13,6 @@
     isIssuesOpen: true
   });
 
-  const props = withDefaults(defineProps<{
-    isIssuesOpen?: boolean
-  }>(), {
-    isIssuesOpen: true
-  });
-
   const fState = useFilterState();
 </script>
 
