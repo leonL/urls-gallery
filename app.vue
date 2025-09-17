@@ -1,23 +1,9 @@
 <script setup lang="ts">
-  import { useResourceStore } from '~/stores/resources';
-  import { useLookupStore } from '~/stores/lookups';
-  import { useTextStore } from '~/stores/texts';
-
   const { locale } = useI18n();
   const isLocaleEn = computed(() => locale.value === 'en');
   const localePath = useLocalePath();
-  
-  const resourceStore = useResourceStore();
-  const lookupStore = useLookupStore();
-  const textStore = useTextStore();
 
   let isDataLoaded = ref(false);
-
-  await Promise.all([
-    callOnce('resources', () => resourceStore.fetch()),
-    callOnce('lookups', () => lookupStore.fetch()),
-    callOnce('texts', () => textStore.fetch())
-  ]);
 
   isDataLoaded.value = true;
 </script>
