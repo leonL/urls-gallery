@@ -1,9 +1,16 @@
 <script setup lang="ts">
-  const textStore = useTextStore();
   const { locale } = useI18n();
   const { width } = useWindowSize();
-
   const isSmallScreen = computed(() => width.value < 800);
+
+  const resourceStore = useResourceStore();
+  await useAsyncData('resources', () => resourceStore.fetch());
+
+  const lookupStore = useLookupStore();
+  await useAsyncData('lookups', () => lookupStore.fetch());
+
+  const textStore = useTextStore();
+  await useAsyncData('texts', () => textStore.fetch());
 
   const subtitleMarkdown = computed(() => {
     return textStore.getByType('subtitle', locale.value);

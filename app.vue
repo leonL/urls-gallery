@@ -5,15 +5,6 @@
 
   const { locale } = useI18n();
   const localePath = useLocalePath();
-  
-  const resourceStore = useResourceStore();
-  await callOnce('resources', () => resourceStore.fetch());
-
-  const lookupStore = useLookupStore();
-  await callOnce('lookups', () => lookupStore.fetch());
-
-  const textStore = useTextStore();
-  await callOnce('texts', () => textStore.fetch());
 
   const isLocaleEn = computed(() => locale.value === 'en');
 
