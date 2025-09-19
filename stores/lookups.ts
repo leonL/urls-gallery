@@ -31,7 +31,8 @@ export const useLookupStore = defineStore('lookup', () => {
       const lookupStore = lookups.value;
 
       const fetchRequests = Object.entries(apiPaths).map(async ([key, value]) => {
-        fetchLookupFromPath(value).then(result => lookupStore[key] = result);
+        const result = await fetchLookupFromPath(value);
+        lookupStore[key] = result;
       });
 
       await Promise.all(fetchRequests);
