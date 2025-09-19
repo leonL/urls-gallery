@@ -2,14 +2,10 @@
   const { locale } = useI18n();
   const isLocaleEn = computed(() => locale.value === 'en');
   const localePath = useLocalePath();
-
-  let isDataLoaded = ref(false);
-
-  isDataLoaded.value = true;
 </script>
 
 <template>
-  <UApp v-if="isDataLoaded">
+  <UApp>
     <header>
       <NuxtLink to="/">
         <img v-if="isLocaleEn" src="~/assets/NBWC_logo_en.png" class="logo" :alt="$t('altTextlogo')">
