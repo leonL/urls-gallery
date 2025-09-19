@@ -44,7 +44,8 @@ export const useLookupStore = defineStore('lookup', () => {
       const lookupCategoryStore = lookupCategories.value;
 
       const fetchRequests = Object.entries(apiPaths).map(async ([key, value]) => {
-        fetchLookupFromPath(value).then(result => lookupStore[key] = result);
+        const result = await fetchLookupFromPath(value);
+        lookupStore[key] = result;
       });
       const issueCategoryFetch = fetchLookupCategoryFromPath('ISSUE CATEGORIES').then(result => {
         lookupCategoryStore.issues = result;
