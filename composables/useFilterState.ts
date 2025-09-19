@@ -6,8 +6,6 @@ export interface Filter {
 }
 
 export function useFilterState() {
-  const resourceStore = useResourceStore();
-
   const initialFilterState = {
     issueIds: [],
     contentTypeIds: [],
