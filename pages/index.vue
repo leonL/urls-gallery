@@ -3,16 +3,8 @@
   const { width } = useWindowSize();
   const isSmallScreen = computed(() => width.value < 800);
 
-  const resourceStore = useResourceStore();
-  const lookupStore = useLookupStore();
   const textStore = useTextStore();
-
-  await Promise.all([
-    useAsyncData('resources', () => resourceStore.fetch()),
-    useAsyncData('lookups', () => lookupStore.fetch()),
-    useAsyncData('texts', () => textStore.fetch())
-  ]);
-
+  
   const subtitleMarkdown = computed(() => {
     return textStore.getByType('subtitle', locale.value);
   });
