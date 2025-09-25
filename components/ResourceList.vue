@@ -28,7 +28,7 @@
     if (isModalOpen.value) isModalOpen.value = false;
   }, { deep: true });
 
-  watch(nTotalPages, (newTotal) => {
+  watch(nTotalPages, () => {
     currentPage.value = 1;
   }, { immediate: true });
 </script>
