@@ -23,7 +23,7 @@
   <div id="filters">
 
     <SummaryToggle :icon="issuesIcon" :heading="$t('issues')" 
-      :isActive="fState.hasAnyIssues.value" :isOpen="isIssuesOpen" @resetFilter="fState.resetByType('issueIds')">
+      :isActive="fState.hasAnyIssues.value" :isOpen="props.isIssuesOpen" @resetFilter="fState.resetByType('issueIds')">
       <Options lookupId="issues" filterId="issueIds" />
     </SummaryToggle>
 
