@@ -14,7 +14,7 @@ export function useFilterState() {
 
   const currentYear = new Date().getFullYear();
 
-  const initialFilterState = {
+  const initialFilterState = <Filter>{
     issueIds: [],
     contentTypeIds: [],
     geographicScopeId: [],
@@ -74,11 +74,10 @@ export function useFilterState() {
   };
 
   const reset = () => {
-    filter.value = initialFilterState;
+    filter.value = structuredClone(initialFilterState);
   }
 
-  const filter = useState<Filter>('resourceFilter', () => (initialFilterState));
-
+  const filter = useState<Filter>('resourceFilter', () => (structuredClone(initialFilterState)));
 
   return { filter, isActive, hasAnyIssues, isLanguageSpecific, hasCustomYearRange, reset,
     hasAnyContentTypes, hasAnyGeographicScopes, resetByType, hasIssues, removeIssues }
