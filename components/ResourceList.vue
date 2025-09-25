@@ -3,16 +3,19 @@
   const isSmallScreen = computed(() => width.value < 800);
 
   const filteredResources = useResourceFilter();
-
   const resourcesPerPage = 10;
   const currentPage = ref(1);
+  
+  const totalResourcesCount = computed(() => filteredResources.value.length);
+  const nTotalPages = computed(() => Math.ceil(totalResourcesCount.value / resourcesPerPage));
+
   const currentPageIndexRange = computed(() => {
     const rangeEnd = (resourcesPerPage * currentPage.value);
     const rangeStart = rangeEnd - resourcesPerPage;
     return [rangeStart, rangeEnd];
   });
+
   const paginatedResources = computed(() => filteredResources.value.slice(...currentPageIndexRange.value)); 
-  const totalResourcesCount = computed(() => filteredResources.value.length);
   const currentPageResourceCount = computed(() => paginatedResources.value.length);
 
   const isModalOpen = ref(false);
@@ -24,6 +27,10 @@
   watch(resourceFilterState, () => {
     if (isModalOpen.value) isModalOpen.value = false;
   }, { deep: true });
+
+  watch(nTotalPages, (newTotal) => {
+    currentPage.value = 1;
+  }, { immediate: true });
 </script>
 
 <template>
