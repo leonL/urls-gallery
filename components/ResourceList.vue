@@ -30,7 +30,7 @@
   }, { deep: true });
 
   watch(nTotalPages, (newTotal) => {
-    if (currentPage.value > newTotal) currentPage.value = newTotal;
+    currentPage.value = 1;
   }, { immediate: true });
 </script>
 
