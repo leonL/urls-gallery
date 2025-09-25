@@ -6,7 +6,7 @@ export interface Filter {
 }
 
 export function useFilterState() {
-  const initialFilterState = {
+  const initialFilterState = <Filter>{
     issueIds: [],
     contentTypeIds: [],
     geographicScopeId: [],
@@ -51,11 +51,10 @@ export function useFilterState() {
   };
 
   const reset = () => {
-    filter.value = initialFilterState;
+    filter.value = structuredClone(initialFilterState);
   }
 
-  const filter = useState<Filter>('resourceFilter', () => (initialFilterState));
-
+  const filter = useState<Filter>('resourceFilter', () => (structuredClone(initialFilterState)));
 
   return { filter, isActive, hasAnyIssues, isLanguageSpecific, reset,
     hasAnyContentTypes, hasAnyGeographicScopes, resetByType, hasIssues, removeIssues }
