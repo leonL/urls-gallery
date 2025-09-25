@@ -27,7 +27,7 @@
 
     <SummaryToggle :icon="issuesIcon" :heading="$t('issues')" 
       :isActive="fState.hasAnyIssues.value" :isOpen="isIssuesOpen" @resetFilter="fState.resetByType('issueIds')">
-      <Options lookupId="issues" filterId="issueIds" />
+      <CategorizedCheckboxOptions categoryId="issues" filterId="issueIds" />
     </SummaryToggle>
 
     <SummaryToggle :icon="calendarIcon" :heading="$t('publicationYear')"
